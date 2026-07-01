@@ -270,14 +270,14 @@
     font-family: 'Rubik Glitch', cursive;
     color: #ebebeb;
     white-space: nowrap;
-    transition: font-size 0.55s ease, top 0.55s ease;
+    transition: opacity 0.4s ease;
     pointer-events: none;
     user-select: none;
     animation: heroGlitch 10s infinite;
   }
 
-  /* Pause glitch when card is open and hero is small */
-  .hero-mobile.glitch-paused {
+  .hero-mobile.hidden {
+    opacity: 0;
     animation-play-state: paused;
   }
 
@@ -340,7 +340,7 @@
   .card-panel {
     position: absolute;
     inset: 0;
-    padding: 2.8rem 2rem 4rem;
+    padding: 1.5rem 2rem 3.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -670,6 +670,7 @@ function closeCardDesktop(name) {
 
 const heroM = document.getElementById('heroMobile');
 const gridM = document.getElementById('gridMobile');
+const pageMobile = document.getElementById('pageMobile');
 const cardMobile = document.getElementById('cardMobile');
 const navMobileButtons = document.querySelectorAll('.nav-mobile button[data-section]');
 
@@ -682,28 +683,28 @@ const panels = {
 };
 
 function positionHeroMobile() {
-  const rect = gridM.getBoundingClientRect();
-  const rowH = rect.height / 4;
+  const gridRect = gridM.getBoundingClientRect();
+  const pageRect = pageMobile.getBoundingClientRect();
+  const rowH = gridRect.height / 4;
   const fs = Math.round(rowH * 0.28);
   heroM.style.fontSize = fs + 'px';
   heroM.dataset.fullFontSize = fs;
-  // With position:fixed, top is relative to viewport, so add grid's top offset
-  const top = rect.top + rowH - fs / 2;
+  // Top relative to page-mobile container
+  const top = (gridRect.top - pageRect.top) + rowH - fs / 2;
   heroM.style.top = top + 'px';
   heroM.dataset.fullTop = top;
 }
 
-function shrinkHeroMobile() {
-  const fs = parseInt(heroM.dataset.fullFontSize || 28);
-  const shrunkFs = Math.round(fs / 3);
-  heroM.style.fontSize = shrunkFs + 'px';
-  const remPx = parseFloat(getComputedStyle(document.documentElement).fontSize);
-  heroM.style.top = (remPx * 0.8) + 'px';
+function hideHeroMobile() {
+  heroM.classList.add('hidden');
+}
+
+function showHeroMobile() {
+  heroM.classList.remove('hidden');
 }
 
 function restoreHeroMobile() {
-  heroM.style.fontSize = (heroM.dataset.fullFontSize || 28) + 'px';
-  heroM.style.top = (heroM.dataset.fullTop || 0) + 'px';
+  showHeroMobile();
 }
 
 function setCardFontSize() {
@@ -776,7 +777,7 @@ function openMobileSection(name) {
 
   if (!activeMobileSection) {
     setCardHeight();
-    shrinkHeroMobile();
+    hideHeroMobile();
     cardMobile.classList.add('open');
     activeMobileSection = name;
     setActiveNavButton(name);
