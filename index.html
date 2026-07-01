@@ -261,13 +261,14 @@
   /* Hero mobile — sits as the very top layer, never hidden by cards */
   .hero-mobile {
     position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    width: 100%;
+    text-align: center;
     z-index: 30;
     font-family: 'Rubik Glitch', cursive;
     color: #ebebeb;
     white-space: nowrap;
-    transition: font-size 0.55s ease, top 0.55s ease, transform 0.55s ease;
+    transition: font-size 0.55s ease, top 0.55s ease;
     pointer-events: none;
     user-select: none;
     animation: heroGlitch 10s infinite;
@@ -695,11 +696,13 @@ function shrinkHeroMobile() {
   heroM.style.fontSize = shrunkFs + 'px';
   const remPx = parseFloat(getComputedStyle(document.documentElement).fontSize);
   heroM.style.top = (remPx * 0.8) + 'px';
+  heroM.style.transform = 'none';
 }
 
 function restoreHeroMobile() {
   heroM.style.fontSize = (heroM.dataset.fullFontSize || 28) + 'px';
   heroM.style.top = (heroM.dataset.fullTop || 0) + 'px';
+  heroM.style.transform = 'none';
 }
 
 function setCardFontSize() {
