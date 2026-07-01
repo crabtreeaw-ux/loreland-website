@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Loreland</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -226,6 +226,7 @@
     display: none;
     flex-direction: column;
     height: 100vh;
+    height: 100dvh;
     width: 100vw;
     background: #000;
     overflow: hidden;
@@ -259,7 +260,7 @@
 
   /* Hero mobile — sits as the very top layer, never hidden by cards */
   .hero-mobile {
-    position: absolute;
+    position: fixed;
     left: 50%;
     transform: translateX(-50%);
     z-index: 30;
@@ -284,6 +285,7 @@
     justify-content: space-around;
     align-items: center;
     padding: 2rem 0.5rem;
+    padding-bottom: max(2rem, env(safe-area-inset-bottom));
   }
 
   .nav-mobile button {
