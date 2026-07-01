@@ -294,7 +294,7 @@
     color: #ebebeb;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
-    font-size: clamp(0.72rem, 3.2vw, 1rem);
+    font-size: clamp(0.85rem, 3.2vw, 1rem);
     cursor: pointer;
     letter-spacing: 0.04em;
     padding: 0.25rem 0.2rem;
@@ -341,7 +341,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    font-size: 0.78rem;
+    font-size: 1rem;
     line-height: 1.75;
     color: #ebebeb;
     font-family: 'Roboto', sans-serif;
@@ -683,7 +683,8 @@ function positionHeroMobile() {
   const fs = Math.round(rowH * 0.28);
   heroM.style.fontSize = fs + 'px';
   heroM.dataset.fullFontSize = fs;
-  const top = rowH - fs / 2;
+  // With position:fixed, top is relative to viewport, so add grid's top offset
+  const top = rect.top + rowH - fs / 2;
   heroM.style.top = top + 'px';
   heroM.dataset.fullTop = top;
 }
