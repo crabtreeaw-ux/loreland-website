@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loreland</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik+Glitch&family=Roboto:wght@300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: #000;
+    color: #ebebeb;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+  }
+
+  /* ─── DESKTOP LAYOUT (> 768px) ─── */
+
+  .page-desktop {
+    display: none;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    background: #000;
+    overflow: hidden;
+  }
+
+  /* Image grid top section */
+  .grid-desktop {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    overflow: hidden;
+  }
+
+  .grid-desktop .img-cell {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+
+  .grid-desktop .img-cell img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Dark overlay covering the entire image grid */
+  .grid-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.37);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* Hero */
+  .hero-desktop {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    font-family: 'Rubik Glitch', cursive;
+    color: #ebebeb;
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    animation: heroGlitch 10s infinite;
+  }
+
+  @keyframes heroGlitch {
+    0%   { transform: translateX(-50%); text-shadow: none; }
+    92%  { transform: translateX(-50%); text-shadow: none; }
+    92.5% {
+      transform: translateX(calc(-50% + 3px)) skewX(-4deg);
+      text-shadow: -3px 0 #ff003c, 3px 0 #00f0ff;
+    }
+    93%  {
+      transform: translateX(calc(-50% - 4px)) skewX(3deg);
+      text-shadow: 3px 0 #ff003c, -3px 0 #00f0ff;
+    }
+    93.5% {
+      transform: translateX(calc(-50% + 2px)) skewX(-2deg);
+      text-shadow: -2px 0 #ff003c, 2px 0 #00f0ff;
+    }
+    94%  {
+      transform: translateX(calc(-50% - 3px)) skewX(4deg);
+      text-shadow: 4px 0 #ff003c, -4px 0 #00f0ff;
+    }
+    94.5% {
+      transform: translateX(calc(-50% + 1px)) skewX(-1deg);
+      text-shadow: -1px 0 #ff003c, 1px 0 #00f0ff;
+    }
+    95%  { transform: translateX(-50%); text-shadow: none; }
+    100% { transform: translateX(-50%); text-shadow: none; }
+  }
+
+  /* ─── DESKTOP NAV ─── */
+  .nav-desktop {
+    background: #000;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+    padding: 2.4rem 0;
+  }
+
+  .nav-desktop button {
+    justify-self: center;
+    background: none;
+    border: none;
+    color: #ebebeb;
+    font-family: 'Rubik Glitch', cursive;
+    font-size: 1.35rem;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    padding: 0.3rem 0.5rem;
+    transition: opacity 0.2s;
+  }
+
+  .nav-desktop button:hover { opacity: 0.7; }
+
+  /* Nav item wrapper — holds nav button and its X together */
+  .nav-item-desktop {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  /* X close button — hidden until its card is open */
+  .nav-close-desktop {
+    background: none;
+    border: none;
+    color: #ebebeb;
+    font-family: 'Rubik Glitch', cursive;
+    font-size: 1rem;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 0;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .nav-close-desktop.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-close-desktop:hover { opacity: 0.7 !important; }
+
+  /* ─── DESKTOP CARDS ─── */
+  .card-desktop {
+    position: absolute;
+    bottom: 0;
+    z-index: 20;
+    background: #000;
+    transform: translateY(100%);
+    transition: transform 0.55s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-desktop.open { transform: translateY(0); }
+
+  .card-content-desktop {
+    padding: 2.4rem 2.2rem 2.2rem;
+    flex: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    overflow-y: auto;
+    font-size: 1.3rem;
+    line-height: 1.75;
+    color: #ebebeb;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+  }
+
+  .card-desktop.content-visible .card-content-desktop { opacity: 1; }
+
+  .card-content-desktop p + p { margin-top: 1.1em; }
+
+  /* Contact card: center both vertically and horizontally */
+  #cardContactD .card-content-desktop {
+    align-items: center;
+    text-align: center;
+  }
+
+
+  /* QR code */
+  .qr-wrap {
+    margin: 3.2rem auto;
+    text-align: center;
+  }
+  .qr-wrap img {
+    width: 140px;
+    height: 140px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .exp-link {
+    color: #ebebeb;
+    text-decoration: underline;
+  }
+  .exp-link:hover { opacity: 0.7; }
+
+  /* ─── MOBILE LAYOUT (≤ 768px) ─── */
+
+  .page-mobile {
+    display: none;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    background: #000;
+    overflow: hidden;
+  }
+
+  .grid-mobile {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    overflow: hidden;
+  }
+
+  .grid-mobile .img-cell {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+
+  .grid-mobile .img-cell img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Keep key subjects in frame at square crop ratios */
+
+
+  /* Hero mobile — sits as the very top layer, never hidden by cards */
+  .hero-mobile {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 30;
+    font-family: 'Rubik Glitch', cursive;
+    color: #ebebeb;
+    white-space: nowrap;
+    transition: font-size 0.55s ease, top 0.55s ease, transform 0.55s ease;
+    pointer-events: none;
+    user-select: none;
+    animation: heroGlitch 10s infinite;
+  }
+
+  /* Pause glitch when card is open and hero is small */
+  .hero-mobile.glitch-paused {
+    animation-play-state: paused;
+  }
+
+  /* Mobile nav */
+  .nav-mobile {
+    background: #000;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 2rem 0.5rem;
+  }
+
+  .nav-mobile button {
+    background: none;
+    border: none;
+    color: #ebebeb;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: clamp(0.72rem, 3.2vw, 1rem);
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    padding: 0.25rem 0.2rem;
+    transition: opacity 0.2s;
+  }
+
+  .nav-mobile button:hover { opacity: 0.7; }
+
+  /* Active nav button gets underline */
+  .nav-mobile button.active {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  /* ─── MOBILE CARD (single full-height panel, slides up from bottom) ─── */
+  .card-mobile {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+    background: rgba(0, 0, 0, 0.75);
+    transform: translateY(100%);
+    transition: transform 0.55s ease;
+    overflow: hidden;
+    /* top set by JS to sit just above the nav bar */
+  }
+
+  .card-mobile.open { transform: translateY(0); }
+
+  /* Text carousel viewport — clips panels */
+  .card-carousel {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 35;
+  }
+
+  /* Individual text panels */
+  .card-panel {
+    position: absolute;
+    inset: 0;
+    padding: 2.8rem 2rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 0.78rem;
+    line-height: 1.75;
+    color: #ebebeb;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    transform: translateY(100%);
+    transition: transform 0.45s ease, opacity 0.3s ease;
+    opacity: 0;
+    overflow-y: auto;
+  }
+
+  .card-panel.active {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .card-panel.exit-up {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  /* Font size set dynamically by JS based on actual card height */
+
+  .card-panel p + p { margin-top: 1.1em; }
+
+  /* Caret — always fixed at bottom right of card, never moves */
+  .card-caret-mobile {
+    position: absolute;
+    bottom: 1.4rem;
+    right: 1.6rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 40;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    padding: 0.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-caret-mobile::after {
+    content: '';
+    display: block;
+    width: 22px;
+    height: 22px;
+    border-right: 2.5px solid #ebebeb;
+    border-bottom: 2.5px solid #ebebeb;
+    transform: rotate(45deg) translateY(-4px);
+  }
+
+  .card-mobile.open .card-caret-mobile { opacity: 1; }
+  .card-caret-mobile:hover { opacity: 0.7 !important; }
+
+  /* Experience CTA */
+  .exp-cta-mobile {
+    display: block;
+    margin-top: 4.5em;
+    text-align: center;
+    color: #ebebeb;
+    text-decoration: underline;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: inherit;
+  }
+  .exp-cta-mobile:hover { opacity: 0.7; }
+
+  /* Responsive visibility */
+  @media (min-width: 1281px) {
+    .page-desktop { display: flex; }
+    .page-mobile { display: none !important; }
+  }
+
+  @media (max-width: 1280px) {
+    .page-mobile { display: flex; }
+    .page-desktop { display: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════ DESKTOP ═══════════════════════ -->
+<div class="page-desktop" id="pageDesktop">
+
+  <div class="grid-desktop" id="gridDesktop">
+
+    <!-- Top row -->
+    <div class="img-cell" id="d-tlm"><img src="Loreland_Laundromat.png" alt="Laundromat"></div>
+    <div class="img-cell" id="d-wm"><img src="Loreland_Gas_Station.png" alt="Gas Station"></div>
+    <div class="img-cell" id="d-sw"><img src="Loreland_Elevator.png" alt="Elevator"></div>
+    <div class="img-cell" id="d-gh"><img src="Loreland_Suburban_Intersection.png" alt="Suburban Intersection"></div>
+
+    <!-- Bottom row -->
+    <div class="img-cell" id="d-fiw"><img src="Loreland_Hospital_Hallway.png" alt="Hospital Hallway"></div>
+    <div class="img-cell" id="d-fot"><img src="Loreland_Empty_Playground.png" alt="Empty Playground"></div>
+    <div class="img-cell" id="d-www"><img src="Loreland_Parking_Lot.png" alt="Parking Lot"></div>
+    <div class="img-cell" id="d-dag"><img src="Loreland_Grocery_Aisle.png" alt="Grocery Aisle"></div>
+
+    <!-- Overlay -->
+    <div class="grid-overlay"></div>
+
+    <!-- Hero -->
+    <div class="hero-desktop" id="heroDesktop">LORELAND</div>
+
+    <!-- About card (col 1) -->
+    <div class="card-desktop" id="cardAboutD" style="left:0; width:25%;">
+      <div class="card-content-desktop">
+        <p>Loreland is a location-aware storytelling app that creates original, fictional horror stories inspired by your immediate surroundings. Open the app anywhere, press play, and hear an eerie tale that unfolds right where you're standing. Waiting for your coffee. Walking through your neighborhood. Sitting in the break-room. Resting at a highway pull-off. Even the most familiar places can become strangely unfamiliar. Each story is uniquely crafted using your hyper-local environment as inspiration, transforming ordinary moments into unsettling encounters filled with mystery, uncanny events, and lingering suspense.</p>
+      </div>
+    </div>
+
+    <!-- Experience card (col 2) -->
+    <div class="card-desktop" id="cardExperienceD" style="left:25%; width:25%;">
+      <div class="card-content-desktop">
+        <p>You're one of the first to step inside Loreland. What follows is an early prototype, just a glimpse of what's coming. Press play right where you are. That's the whole idea.</p>
+        <p>Once you've heard a story, a few quick questions will help shape what Loreland becomes next.</p>
+        <div class="qr-wrap">
+          <img src="qr-code.png" alt="QR code to experience Loreland prototype">
+        </div>
+        <p>Scan to begin, or follow the link below.<br>
+        <a href="https://loreland-eight.vercel.app" target="_blank" rel="noopener" class="exp-link">loreland-eight.vercel.app</a></p>
+      </div>
+    </div>
+
+    <!-- Narrative AR card (col 3) -->
+    <div class="card-desktop" id="cardNarrativeD" style="left:50%; width:25%;">
+      <div class="card-content-desktop">
+        <p>Narrative Augmented Reality (Narrative AR) is a new form of storytelling that augments the world not with digital graphics, but with imagination. Instead of placing virtual objects on a screen, Loreland layers AI-generated narratives onto the real places around you, using your location, the surrounding landscape, weather, time of day, and atmosphere as the foundation for each story. The physical world becomes the stage, while your imagination does the rest. A quiet neighborhood, a parking lot, or the trail you walk every day suddenly carries mystery, tension, and possibility. By transforming familiar places into living settings for immersive stories, Narrative AR introduces a new way to experience both storytelling and the world itself.</p>
+      </div>
+    </div>
+
+    <!-- Contact card (col 4) -->
+    <div class="card-desktop" id="cardContactD" style="left:75%; width:25%;">
+      <div class="card-content-desktop">
+        <p>Got questions?</p>
+        <p><a href="mailto:crabtreeaw@gmail.com?subject=Hey%20Loreland!" target="_blank" rel="noopener" class="exp-link">Contact us</a></p>
+      </div>
+    </div>
+
+  </div><!-- /grid-desktop -->
+
+  <!-- Nav -->
+  <div class="nav-desktop">
+    <div class="nav-item-desktop">
+      <button onclick="openCardDesktop('about')">about</button>
+      <button class="nav-close-desktop" id="closeAboutD" onclick="closeCardDesktop('about')">✕</button>
+    </div>
+    <div class="nav-item-desktop">
+      <button onclick="openCardDesktop('experience')">experience</button>
+      <button class="nav-close-desktop" id="closeExperienceD" onclick="closeCardDesktop('experience')">✕</button>
+    </div>
+    <div class="nav-item-desktop">
+      <button onclick="openCardDesktop('narrative')">narrative AR</button>
+      <button class="nav-close-desktop" id="closeNarrativeD" onclick="closeCardDesktop('narrative')">✕</button>
+    </div>
+    <div class="nav-item-desktop">
+      <button onclick="openCardDesktop('contact')">contact</button>
+      <button class="nav-close-desktop" id="closeContactD" onclick="closeCardDesktop('contact')">✕</button>
+    </div>
+  </div>
+
+</div><!-- /page-desktop -->
+
+
+<!-- ═══════════════════════ MOBILE ═══════════════════════ -->
+<div class="page-mobile" id="pageMobile">
+
+  <div class="grid-mobile" id="gridMobile">
+
+    <!-- Row 1 -->
+    <div class="img-cell"><img src="Loreland_Laundromat.png" alt="Laundromat"></div>
+    <div class="img-cell"><img src="Loreland_Gas_Station.png" alt="Gas Station"></div>
+
+    <!-- Row 2 -->
+    <div class="img-cell"><img src="Loreland_Hospital_Hallway.png" alt="Hospital Hallway"></div>
+    <div class="img-cell"><img src="Loreland_Empty_Playground.png" alt="Empty Playground"></div>
+
+    <!-- Row 3 -->
+    <div class="img-cell"><img src="Loreland_Elevator.png" alt="Elevator"></div>
+    <div class="img-cell"><img src="Loreland_Suburban_Intersection.png" alt="Suburban Intersection"></div>
+
+    <!-- Row 4 -->
+    <div class="img-cell"><img src="Loreland_Parking_Lot.png" alt="Parking Lot"></div>
+    <div class="img-cell"><img src="Loreland_Grocery_Aisle.png" alt="Grocery Aisle"></div>
+
+    <!-- Overlay -->
+    <div class="grid-overlay"></div>
+
+    <!-- Hero -->
+    <div class="hero-mobile" id="heroMobile">LORELAND</div>
+
+    <!-- Single full-height card with text carousel -->
+    <div class="card-mobile" id="cardMobile">
+
+      <!-- Caret to close — always stays put -->
+      <button class="card-caret-mobile" id="caretMobile" onclick="closeMobileCard()"></button>
+
+      <!-- Text carousel -->
+      <div class="card-carousel">
+
+        <!-- About panel -->
+        <div class="card-panel" id="panelAbout">
+          <p>Loreland is a location-aware storytelling app that creates original, fictional horror stories inspired by your immediate surroundings. Open the app anywhere, press play, and hear an eerie tale that unfolds right where you're standing. Waiting for your coffee. Walking through your neighborhood. Sitting in the break-room. Resting at a highway pull-off. Even the most familiar places can become strangely unfamiliar. Each story is uniquely crafted using your hyper-local environment as inspiration, transforming ordinary moments into unsettling encounters filled with mystery, uncanny events, and lingering suspense.</p>
+        </div>
+
+        <!-- Experience panel -->
+        <div class="card-panel" id="panelExperience">
+          <p>You're one of the first to step inside Loreland. What follows is an early prototype, just a glimpse of what's coming. Press play right where you are. That's the whole idea.</p>
+          <p>Once you've heard a story, a few quick questions will help shape what Loreland becomes next.</p>
+          <a href="https://loreland-eight.vercel.app" target="_blank" rel="noopener" class="exp-cta-mobile">Experience the prototype</a>
+        </div>
+
+        <!-- Narrative AR panel -->
+        <div class="card-panel" id="panelNarrative">
+          <p>Narrative Augmented Reality (Narrative AR) is a new form of storytelling that augments the world not with digital graphics, but with imagination. Instead of placing virtual objects on a screen, Loreland layers AI-generated narratives onto the real places around you, using your location, the surrounding landscape, weather, time of day, and atmosphere as the foundation for each story. The physical world becomes the stage, while your imagination does the rest. A quiet neighborhood, a parking lot, or the trail you walk every day suddenly carries mystery, tension, and possibility. By transforming familiar places into living settings for immersive stories, Narrative AR introduces a new way to experience both storytelling and the world itself.</p>
+        </div>
+
+      </div><!-- /card-carousel -->
+    </div><!-- /card-mobile -->
+
+  </div><!-- /grid-mobile -->
+
+  <div class="nav-mobile">
+    <button data-section="about" onclick="openMobileSection('about')">about</button>
+    <button data-section="experience" onclick="openMobileSection('experience')">experience</button>
+    <button data-section="narrative" onclick="openMobileSection('narrative')">narrative AR</button>
+    <button onclick="mobileContact()">contact</button>
+  </div>
+
+</div><!-- /page-mobile -->
+
+<script>
+// ─── DESKTOP LOGIC ───────────────────────────────────────────
+
+let openDesktopCard = null;
+
+const heroD = document.getElementById('heroDesktop');
+const gridD = document.getElementById('gridDesktop');
+
+// Set desktop hero position and size after layout
+function positionHeroDesktop() {
+  const grid = gridD;
+  const gridRect = grid.getBoundingClientRect();
+  const rowH = gridRect.height / 2;
+
+  // Lower third of top row (vertical position unchanged — user likes this)
+  const topOfLowerThird = rowH * (2 / 3);
+  const lowerThirdH = rowH / 3;
+
+  // Font size as a simple, predictable fraction of the lower-third height.
+  // (Previous width-matching approach against Rubik Glitch's jagged glyphs
+  // was unreliable and produced runaway sizes — back to height-based.)
+  const fs = Math.round(lowerThirdH * 0.86);
+
+  heroD.style.fontSize = fs + 'px';
+  heroD.dataset.fullFontSize = fs;
+
+  // Vertical: center in lower third of top row
+  const topPos = topOfLowerThird + (lowerThirdH - fs) / 2;
+  heroD.style.top = topPos + 'px';
+  heroD.dataset.fullTop = topPos;
+}
+
+function getDesktopCard(name) {
+  const map = { about: 'cardAboutD', experience: 'cardExperienceD', narrative: 'cardNarrativeD', contact: 'cardContactD' };
+  return document.getElementById(map[name]);
+}
+
+// Card height = full image grid height
+function setCardHeights() {
+  const h = gridD.offsetHeight;
+  document.querySelectorAll('.card-desktop').forEach(c => c.style.height = h + 'px');
+}
+
+function getDesktopCloseBtn(name) {
+  const map = { about: 'closeAboutD', experience: 'closeExperienceD', narrative: 'closeNarrativeD', contact: 'closeContactD' };
+  return map[name] ? document.getElementById(map[name]) : null;
+}
+
+function showDesktopX(name) {
+  // Hide all X buttons first
+  document.querySelectorAll('.nav-close-desktop').forEach(b => b.classList.remove('visible'));
+  // Show just the one for the open card
+  if (name) {
+    const btn = getDesktopCloseBtn(name);
+    if (btn) btn.classList.add('visible');
+  }
+}
+
+function openCardDesktop(name) {
+  if (openDesktopCard === name) return;
+
+  if (openDesktopCard) {
+    const prev = getDesktopCard(openDesktopCard);
+    prev.classList.remove('content-visible');
+    prev.classList.remove('open');
+    _openDesktopCard(name);
+  } else {
+    _openDesktopCard(name);
+  }
+}
+
+function _openDesktopCard(name) {
+  openDesktopCard = name;
+  showDesktopX(name);
+  const card = getDesktopCard(name);
+  card.classList.add('open');
+  setTimeout(() => { card.classList.add('content-visible'); }, 560);
+}
+
+function closeCardDesktop(name) {
+  const card = getDesktopCard(name);
+  card.classList.remove('content-visible');
+  showDesktopX(null);
+  setTimeout(() => {
+    card.classList.remove('open');
+    openDesktopCard = null;
+  }, 310);
+}
+
+// ─── MOBILE LOGIC ────────────────────────────────────────────
+
+const heroM = document.getElementById('heroMobile');
+const gridM = document.getElementById('gridMobile');
+const cardMobile = document.getElementById('cardMobile');
+const navMobileButtons = document.querySelectorAll('.nav-mobile button[data-section]');
+
+let activeMobileSection = null;
+
+const panels = {
+  about: document.getElementById('panelAbout'),
+  experience: document.getElementById('panelExperience'),
+  narrative: document.getElementById('panelNarrative')
+};
+
+function positionHeroMobile() {
+  const rect = gridM.getBoundingClientRect();
+  const rowH = rect.height / 4;
+  const fs = Math.round(rowH * 0.28);
+  heroM.style.fontSize = fs + 'px';
+  heroM.dataset.fullFontSize = fs;
+  const top = rowH - fs / 2;
+  heroM.style.top = top + 'px';
+  heroM.dataset.fullTop = top;
+}
+
+function shrinkHeroMobile() {
+  const fs = parseInt(heroM.dataset.fullFontSize || 28);
+  const shrunkFs = Math.round(fs / 3);
+  heroM.style.fontSize = shrunkFs + 'px';
+  const remPx = parseFloat(getComputedStyle(document.documentElement).fontSize);
+  heroM.style.top = (remPx * 0.8) + 'px';
+}
+
+function restoreHeroMobile() {
+  heroM.style.fontSize = (heroM.dataset.fullFontSize || 28) + 'px';
+  heroM.style.top = (heroM.dataset.fullTop || 0) + 'px';
+}
+
+function setCardFontSize() {
+  const cardH = cardMobile.offsetHeight;
+  const cardW = cardMobile.offsetWidth;
+  if (!cardH || !cardW) return;
+
+  // Available height = card height minus top padding, bottom padding, and caret area
+  const availH = cardH - 130;
+
+  // Get the longest text content (narrative AR panel)
+  const refPanel = document.getElementById('panelNarrative');
+  if (!refPanel) return;
+
+  // Create a temporary off-screen div to measure text at different sizes
+  const tester = document.createElement('div');
+  tester.style.cssText = `
+    position: fixed;
+    visibility: hidden;
+    width: ${cardW - 64}px;
+    font-family: Roboto, sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+    padding: 0;
+    margin: 0;
+  `;
+  tester.innerHTML = refPanel.innerHTML;
+  document.body.appendChild(tester);
+
+  // Find largest font size where text fits
+  let bestFs = 13;
+  for (let fs = 22; fs >= 13; fs--) {
+    tester.style.fontSize = fs + 'px';
+    if (tester.offsetHeight <= availH) {
+      bestFs = fs;
+      break;
+    }
+  }
+
+  document.body.removeChild(tester);
+
+  // Apply to all panels
+  document.querySelectorAll('.card-panel').forEach(p => {
+    p.style.fontSize = bestFs + 'px';
+  });
+}
+
+function setCardHeight() {
+  // Card fills grid area (everything above the nav bar)
+  const gridRect = gridM.getBoundingClientRect();
+  cardMobile.style.top = gridRect.top + 'px';
+  setCardFontSize();
+}
+
+function setActiveNavButton(name) {
+  document.querySelectorAll('.nav-mobile button').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  if (name) {
+    const btn = document.querySelector(`.nav-mobile button[data-section="${name}"]`);
+    if (btn) btn.classList.add('active');
+  }
+}
+
+function openMobileSection(name) {
+  if (name === activeMobileSection) return;
+
+  const newPanel = panels[name];
+  if (!newPanel) return;
+
+  if (!activeMobileSection) {
+    setCardHeight();
+    shrinkHeroMobile();
+    cardMobile.classList.add('open');
+    activeMobileSection = name;
+    setActiveNavButton(name);
+    heroM.classList.add('glitch-paused');
+    setTimeout(() => {
+      setCardFontSize();
+      newPanel.classList.add('active');
+    }, 400);
+  } else {
+    // Card already open — carousel: exit current up, bring new in from below
+    const currentPanel = panels[activeMobileSection];
+    if (currentPanel) {
+      currentPanel.classList.remove('active');
+      currentPanel.classList.add('exit-up');
+      setTimeout(() => { currentPanel.classList.remove('exit-up'); }, 450);
+    }
+    activeMobileSection = name;
+    setActiveNavButton(name);
+    setTimeout(() => {
+      newPanel.classList.add('active');
+    }, 80);
+  }
+}
+
+function closeMobileCard() {
+  if (!activeMobileSection) return;
+  const currentPanel = panels[activeMobileSection];
+  if (currentPanel) currentPanel.classList.remove('active');
+  setTimeout(() => {
+    cardMobile.classList.remove('open');
+    activeMobileSection = null;
+    setActiveNavButton(null);
+    restoreHeroMobile();
+    heroM.classList.remove('glitch-paused');
+  }, 200);
+}
+
+function mobileContact() {
+  window.open('mailto:crabtreeaw@gmail.com?subject=Hey%20Loreland!', '_blank');
+}
+
+// ─── INIT ─────────────────────────────────────────────────────
+
+function init() {
+  if (window.innerWidth > 1280) {
+    setCardHeights();
+    positionHeroDesktop();
+  } else {
+    positionHeroMobile();
+    setCardHeight();
+  }
+}
+
+function initWhenFontsReady() {
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(init);
+  } else {
+    init();
+  }
+}
+
+window.addEventListener('load', initWhenFontsReady);
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 1280) {
+    setCardHeights();
+    if (!openDesktopCard) positionHeroDesktop();
+  } else {
+    positionHeroMobile();
+    setCardHeight();
+  }
+});
+</script>
+</body>
+</html>
