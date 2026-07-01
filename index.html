@@ -260,9 +260,12 @@
 
   /* Hero mobile — sits as the very top layer, never hidden by cards */
   .hero-mobile {
-    position: fixed;
-    left: 50vw;
-    transform: translateX(-50%);
+    position: absolute;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     z-index: 30;
     font-family: 'Rubik Glitch', cursive;
     color: #ebebeb;
@@ -363,6 +366,7 @@
   }
 
   /* Font size set dynamically by JS based on actual card height */
+  /* Base size intentionally large — JS will scale down for longer content */
 
   .card-panel p + p { margin-top: 1.1em; }
 
@@ -509,6 +513,9 @@
 <!-- ═══════════════════════ MOBILE ═══════════════════════ -->
 <div class="page-mobile" id="pageMobile">
 
+  <!-- Hero sits outside grid, overlaid on full page width -->
+  <div class="hero-mobile" id="heroMobile">LORELAND</div>
+
   <div class="grid-mobile" id="gridMobile">
 
     <!-- Row 1 -->
@@ -529,9 +536,6 @@
 
     <!-- Overlay -->
     <div class="grid-overlay"></div>
-
-    <!-- Hero -->
-    <div class="hero-mobile" id="heroMobile">LORELAND</div>
 
     <!-- Single full-height card with text carousel -->
     <div class="card-mobile" id="cardMobile">
@@ -730,8 +734,8 @@ function setCardFontSize() {
   document.body.appendChild(tester);
 
   // Find largest font size where text fits
-  let bestFs = 13;
-  for (let fs = 22; fs >= 13; fs--) {
+  let bestFs = 16;
+  for (let fs = 28; fs >= 16; fs--) {
     tester.style.fontSize = fs + 'px';
     if (tester.offsetHeight <= availH) {
       bestFs = fs;
