@@ -273,7 +273,7 @@
     transition: opacity 0.4s ease;
     pointer-events: none;
     user-select: none;
-    animation: heroGlitch 10s infinite;
+    animation: heroGlitchMobile 10s infinite;
     text-align: center;
     overflow: visible;
   }
@@ -281,6 +281,33 @@
   .hero-mobile.hidden {
     opacity: 0;
     animation-play-state: paused;
+  }
+
+  @keyframes heroGlitchMobile {
+    0%   { transform: none; text-shadow: none; }
+    92%  { transform: none; text-shadow: none; }
+    92.5% {
+      transform: translateX(3px) skewX(-4deg);
+      text-shadow: -3px 0 #ff003c, 3px 0 #00f0ff;
+    }
+    93%  {
+      transform: translateX(-4px) skewX(3deg);
+      text-shadow: 3px 0 #ff003c, -3px 0 #00f0ff;
+    }
+    93.5% {
+      transform: translateX(2px) skewX(-2deg);
+      text-shadow: -2px 0 #ff003c, 2px 0 #00f0ff;
+    }
+    94%  {
+      transform: translateX(-3px) skewX(4deg);
+      text-shadow: 4px 0 #ff003c, -4px 0 #00f0ff;
+    }
+    94.5% {
+      transform: translateX(1px) skewX(-1deg);
+      text-shadow: -1px 0 #ff003c, 1px 0 #00f0ff;
+    }
+    95%  { transform: none; text-shadow: none; }
+    100% { transform: none; text-shadow: none; }
   }
 
   /* Mobile nav */
