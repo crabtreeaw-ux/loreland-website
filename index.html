@@ -263,6 +263,7 @@
     position: absolute;
     left: 0;
     right: 0;
+    height: 2em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -287,8 +288,8 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 2rem 0.5rem;
-    padding-bottom: max(2rem, env(safe-area-inset-bottom));
+    padding: 1rem 0.5rem;
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
   }
 
   .nav-mobile button {
@@ -688,9 +689,10 @@ function positionHeroMobile() {
   const rowH = gridRect.height / 4;
   const fs = Math.round(rowH * 0.28);
   heroM.style.fontSize = fs + 'px';
+  heroM.style.height = (fs * 1.4) + 'px';
   heroM.dataset.fullFontSize = fs;
-  // Top relative to page-mobile container
-  const top = (gridRect.top - pageRect.top) + rowH - fs / 2;
+  // Position vertically at seam between row 1 and row 2, centered
+  const top = (gridRect.top - pageRect.top) + rowH - (fs * 0.7);
   heroM.style.top = top + 'px';
   heroM.dataset.fullTop = top;
 }
