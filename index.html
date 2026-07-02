@@ -719,7 +719,7 @@ function positionHeroMobile() {
   // Size font to fit within screen width — LORELAND is ~8 chars
   // Rubik Glitch is wide, so target ~80% of screen width max
   const screenW = window.innerWidth;
-  const fs = Math.min(Math.round(rowH * 0.38), Math.round(screenW * 0.145));
+  const fs = Math.min(Math.round(rowH * 0.48), Math.round(screenW * 0.175));
   heroM.style.fontSize = fs + 'px';
   heroM.dataset.fullFontSize = fs;
   const top = (gridRect.top - pageRect.top) + rowH - (fs * 0.7);
