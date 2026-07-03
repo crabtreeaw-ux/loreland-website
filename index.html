@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Loreland</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -226,9 +226,13 @@
     display: none;
     flex-direction: column;
     height: 100vh;
-    width: 100vw;
+    height: 100dvh;
+    width: 100%;
+    max-width: 100vw;
     background: #000;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    position: relative;
   }
 
   .grid-mobile {
@@ -260,21 +264,50 @@
   /* Hero mobile — sits as the very top layer, never hidden by cards */
   .hero-mobile {
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    right: 0;
     z-index: 30;
     font-family: 'Rubik Glitch', cursive;
     color: #ebebeb;
     white-space: nowrap;
-    transition: font-size 0.55s ease, top 0.55s ease, transform 0.55s ease;
+    transition: opacity 0.4s ease;
     pointer-events: none;
     user-select: none;
-    animation: heroGlitch 10s infinite;
+    animation: heroGlitchMobile 10s infinite;
+    text-align: center;
+    overflow: visible;
   }
 
-  /* Pause glitch when card is open and hero is small */
-  .hero-mobile.glitch-paused {
+  .hero-mobile.hidden {
+    opacity: 0;
     animation-play-state: paused;
+  }
+
+  @keyframes heroGlitchMobile {
+    0%   { transform: none; text-shadow: none; }
+    92%  { transform: none; text-shadow: none; }
+    92.5% {
+      transform: translateX(3px) skewX(-4deg);
+      text-shadow: -3px 0 #ff003c, 3px 0 #00f0ff;
+    }
+    93%  {
+      transform: translateX(-4px) skewX(3deg);
+      text-shadow: 3px 0 #ff003c, -3px 0 #00f0ff;
+    }
+    93.5% {
+      transform: translateX(2px) skewX(-2deg);
+      text-shadow: -2px 0 #ff003c, 2px 0 #00f0ff;
+    }
+    94%  {
+      transform: translateX(-3px) skewX(4deg);
+      text-shadow: 4px 0 #ff003c, -4px 0 #00f0ff;
+    }
+    94.5% {
+      transform: translateX(1px) skewX(-1deg);
+      text-shadow: -1px 0 #ff003c, 1px 0 #00f0ff;
+    }
+    95%  { transform: none; text-shadow: none; }
+    100% { transform: none; text-shadow: none; }
   }
 
   /* Mobile nav */
@@ -283,7 +316,8 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 2rem 0.5rem;
+    padding: 1rem 0.5rem;
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
   }
 
   .nav-mobile button {
@@ -292,7 +326,7 @@
     color: #ebebeb;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
-    font-size: clamp(0.72rem, 3.2vw, 1rem);
+    font-size: clamp(0.85rem, 3.2vw, 1rem);
     cursor: pointer;
     letter-spacing: 0.04em;
     padding: 0.25rem 0.2rem;
@@ -335,11 +369,11 @@
   .card-panel {
     position: absolute;
     inset: 0;
-    padding: 2.8rem 2rem 4rem;
+    padding: 1.5rem 2rem 3.5rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    font-size: 0.78rem;
+    justify-content: flex-start;
+    font-size: 1rem;
     line-height: 1.75;
     color: #ebebeb;
     font-family: 'Roboto', sans-serif;
@@ -361,6 +395,7 @@
   }
 
   /* Font size set dynamically by JS based on actual card height */
+  /* Base size intentionally large — JS will scale down for longer content */
 
   .card-panel p + p { margin-top: 1.1em; }
 
@@ -447,7 +482,7 @@
     <!-- About card (col 1) -->
     <div class="card-desktop" id="cardAboutD" style="left:0; width:25%;">
       <div class="card-content-desktop">
-        <p>Loreland is a location-aware storytelling app that creates original, fictional horror stories inspired by your immediate surroundings. Open the app anywhere, press play, and hear an eerie tale that unfolds right where you're standing. Waiting for your coffee. Walking through your neighborhood. Sitting in the break-room. Resting at a highway pull-off. Even the most familiar places can become strangely unfamiliar. Each story is uniquely crafted using your hyper-local environment as inspiration, transforming ordinary moments into unsettling encounters filled with mystery, uncanny events, and lingering suspense.</p>
+        <p>Loreland is a location-aware storytelling app that creates original horror stories inspired by your immediate surroundings. Open the app anywhere, press play, and hear an eerie tale that unfolds right where you're standing. Waiting for your coffee. Walking through your neighborhood. Sitting in the break room. Resting at a highway pull-off. Even the most familiar places can become strangely unfamiliar. Each story is uniquely crafted using your hyper-local environment as inspiration, transforming ordinary moments into unsettling encounters filled with mystery, uncanny events, and lingering suspense.</p>
       </div>
     </div>
 
@@ -507,6 +542,9 @@
 <!-- ═══════════════════════ MOBILE ═══════════════════════ -->
 <div class="page-mobile" id="pageMobile">
 
+  <!-- Hero sits outside grid, overlaid on full page width -->
+  <div class="hero-mobile" id="heroMobile">LORELAND</div>
+
   <div class="grid-mobile" id="gridMobile">
 
     <!-- Row 1 -->
@@ -528,9 +566,6 @@
     <!-- Overlay -->
     <div class="grid-overlay"></div>
 
-    <!-- Hero -->
-    <div class="hero-mobile" id="heroMobile">LORELAND</div>
-
     <!-- Single full-height card with text carousel -->
     <div class="card-mobile" id="cardMobile">
 
@@ -542,7 +577,7 @@
 
         <!-- About panel -->
         <div class="card-panel" id="panelAbout">
-          <p>Loreland is a location-aware storytelling app that creates original, fictional horror stories inspired by your immediate surroundings. Open the app anywhere, press play, and hear an eerie tale that unfolds right where you're standing. Waiting for your coffee. Walking through your neighborhood. Sitting in the break-room. Resting at a highway pull-off. Even the most familiar places can become strangely unfamiliar. Each story is uniquely crafted using your hyper-local environment as inspiration, transforming ordinary moments into unsettling encounters filled with mystery, uncanny events, and lingering suspense.</p>
+          <p>Loreland is a location-aware storytelling app that creates original horror stories inspired by your immediate surroundings. Open the app anywhere, press play, and hear an eerie tale that unfolds right where you're standing. Waiting for your coffee. Walking through your neighborhood. Sitting in the break room. Resting at a highway pull-off. Even the most familiar places can become strangely unfamiliar. Each story is uniquely crafted using your hyper-local environment as inspiration, transforming ordinary moments into unsettling encounters filled with mystery, uncanny events, and lingering suspense.</p>
         </div>
 
         <!-- Experience panel -->
@@ -664,6 +699,7 @@ function closeCardDesktop(name) {
 
 const heroM = document.getElementById('heroMobile');
 const gridM = document.getElementById('gridMobile');
+const pageMobile = document.getElementById('pageMobile');
 const cardMobile = document.getElementById('cardMobile');
 const navMobileButtons = document.querySelectorAll('.nav-mobile button[data-section]');
 
@@ -676,27 +712,31 @@ const panels = {
 };
 
 function positionHeroMobile() {
-  const rect = gridM.getBoundingClientRect();
-  const rowH = rect.height / 4;
-  const fs = Math.round(rowH * 0.28);
+  const gridRect = gridM.getBoundingClientRect();
+  const pageRect = pageMobile.getBoundingClientRect();
+  const rowH = gridRect.height / 4;
+
+  // Size font to fit within screen width — LORELAND is ~8 chars
+  // Rubik Glitch is wide, so target ~80% of screen width max
+  const screenW = window.innerWidth;
+  const fs = Math.min(Math.round(rowH * 0.48), Math.round(screenW * 0.175));
   heroM.style.fontSize = fs + 'px';
   heroM.dataset.fullFontSize = fs;
-  const top = rowH - fs / 2;
+  const top = (gridRect.top - pageRect.top) + rowH - (fs * 0.7);
   heroM.style.top = top + 'px';
   heroM.dataset.fullTop = top;
 }
 
-function shrinkHeroMobile() {
-  const fs = parseInt(heroM.dataset.fullFontSize || 28);
-  const shrunkFs = Math.round(fs / 3);
-  heroM.style.fontSize = shrunkFs + 'px';
-  const remPx = parseFloat(getComputedStyle(document.documentElement).fontSize);
-  heroM.style.top = (remPx * 0.8) + 'px';
+function hideHeroMobile() {
+  heroM.classList.add('hidden');
+}
+
+function showHeroMobile() {
+  heroM.classList.remove('hidden');
 }
 
 function restoreHeroMobile() {
-  heroM.style.fontSize = (heroM.dataset.fullFontSize || 28) + 'px';
-  heroM.style.top = (heroM.dataset.fullTop || 0) + 'px';
+  showHeroMobile();
 }
 
 function setCardFontSize() {
@@ -727,8 +767,8 @@ function setCardFontSize() {
   document.body.appendChild(tester);
 
   // Find largest font size where text fits
-  let bestFs = 13;
-  for (let fs = 22; fs >= 13; fs--) {
+  let bestFs = 16;
+  for (let fs = 28; fs >= 16; fs--) {
     tester.style.fontSize = fs + 'px';
     if (tester.offsetHeight <= availH) {
       bestFs = fs;
@@ -769,7 +809,7 @@ function openMobileSection(name) {
 
   if (!activeMobileSection) {
     setCardHeight();
-    shrinkHeroMobile();
+    hideHeroMobile();
     cardMobile.classList.add('open');
     activeMobileSection = name;
     setActiveNavButton(name);
