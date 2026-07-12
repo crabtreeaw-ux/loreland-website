@@ -450,11 +450,12 @@
     text-decoration: none;
     display: block;
     line-height: 0;
-    transition: color 0.2s ease;
+    transition: color 0.2s ease, opacity 0.4s ease;
   }
   .ig-link:hover { color: #ffffff; }
   .ig-link-desktop { z-index: 10; }
   .ig-link-mobile  { z-index: 15; }
+  .ig-link-mobile.hidden { opacity: 0; pointer-events: none; }
 
   /* Responsive visibility */
   @media (min-width: 1281px) {
@@ -781,10 +782,12 @@ function positionHeroMobile() {
 
 function hideHeroMobile() {
   heroM.classList.add('hidden');
+  document.getElementById('ig-mobile')?.classList.add('hidden');
 }
 
 function showHeroMobile() {
   heroM.classList.remove('hidden');
+  document.getElementById('ig-mobile')?.classList.remove('hidden');
 }
 
 function restoreHeroMobile() {
