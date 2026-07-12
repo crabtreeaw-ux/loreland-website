@@ -442,6 +442,20 @@
   }
   .exp-cta-mobile:hover { opacity: 0.7; }
 
+  .ig-link {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(235, 235, 235, 0.5);
+    text-decoration: none;
+    display: block;
+    line-height: 0;
+    transition: color 0.2s ease;
+  }
+  .ig-link:hover { color: rgba(235, 235, 235, 0.9); }
+  .ig-link-desktop { z-index: 10; }
+  .ig-link-mobile  { z-index: 30; }
+
   /* Responsive visibility */
   @media (min-width: 1281px) {
     .page-desktop { display: flex; }
@@ -482,6 +496,17 @@
 
     <!-- Hero -->
     <div class="hero-desktop" id="heroDesktop">LORELAND</div>
+
+    <a href="https://www.instagram.com/lorelandapp/" target="_blank" rel="noopener"
+       id="ig-desktop" class="ig-link ig-link-desktop" aria-label="Loreland on Instagram">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+           fill="none" stroke="currentColor" stroke-width="1.5"
+           stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+        <circle cx="12" cy="12" r="4"/>
+        <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+      </svg>
+    </a>
 
     <!-- About card (col 1) -->
     <div class="card-desktop" id="cardAboutD" style="left:0; width:25%;">
@@ -548,6 +573,17 @@
 
   <!-- Hero sits outside grid, overlaid on full page width -->
   <div class="hero-mobile" id="heroMobile">LORELAND</div>
+
+  <a href="https://www.instagram.com/lorelandapp/" target="_blank" rel="noopener"
+     id="ig-mobile" class="ig-link ig-link-mobile" aria-label="Loreland on Instagram">
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+         fill="none" stroke="currentColor" stroke-width="1.5"
+         stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+      <circle cx="12" cy="12" r="4"/>
+      <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+    </svg>
+  </a>
 
   <div class="grid-mobile" id="gridMobile">
 
@@ -640,6 +676,12 @@ function positionHeroDesktop() {
   const topPos = topOfLowerThird + (lowerThirdH - fs) / 2;
   heroD.style.top = topPos + 'px';
   heroD.dataset.fullTop = topPos;
+  const igD = document.getElementById('ig-desktop');
+  if (igD) {
+    const hRect = heroD.getBoundingClientRect();
+    const pRect = document.getElementById('pageDesktop').getBoundingClientRect();
+    igD.style.top = (hRect.bottom - pRect.top + 10) + 'px';
+  }
 }
 
 function getDesktopCard(name) {
@@ -729,6 +771,12 @@ function positionHeroMobile() {
   const top = (gridRect.top - pageRect.top) + rowH - (fs * 0.7);
   heroM.style.top = top + 'px';
   heroM.dataset.fullTop = top;
+  const igM = document.getElementById('ig-mobile');
+  if (igM) {
+    const hRect = heroM.getBoundingClientRect();
+    const pRect = pageMobile.getBoundingClientRect();
+    igM.style.top = (hRect.bottom - pRect.top + 10) + 'px';
+  }
 }
 
 function hideHeroMobile() {
