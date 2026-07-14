@@ -475,20 +475,26 @@
   }
   .exp-cta-mobile:hover { opacity: 0.7; }
 
-  .ig-link {
+  .social-icons {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    transition: opacity 0.4s ease;
+  }
+  .social-icons-desktop { z-index: 10; }
+  .social-icons-mobile  { z-index: 15; }
+  .social-icons-mobile.hidden { opacity: 0; pointer-events: none; }
+  .ig-link {
     color: #ebebeb;
     text-decoration: none;
     display: block;
     line-height: 0;
-    transition: color 0.2s ease, opacity 0.4s ease;
+    transition: color 0.2s ease;
   }
   .ig-link:hover { color: #ffffff; }
-  .ig-link-desktop { z-index: 10; }
-  .ig-link-mobile  { z-index: 15; }
-  .ig-link-mobile.hidden { opacity: 0; pointer-events: none; }
 
   /* Responsive visibility */
   @media (min-width: 1281px) {
@@ -531,16 +537,25 @@
     <!-- Hero -->
     <div class="hero-desktop" id="heroDesktop">LORELAND</div>
 
-    <a href="https://www.instagram.com/lorelandapp/" target="_blank" rel="noopener"
-       id="ig-desktop" class="ig-link ig-link-desktop" aria-label="Loreland on Instagram">
-      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24"
-           fill="none" stroke="currentColor" stroke-width="1.5"
-           stroke-linecap="round" stroke-linejoin="round">
-        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-        <circle cx="12" cy="12" r="4"/>
-        <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
-      </svg>
-    </a>
+    <div id="social-desktop" class="social-icons social-icons-desktop">
+      <a href="https://www.instagram.com/lorelandapp/" target="_blank" rel="noopener"
+         class="ig-link" aria-label="Loreland on Instagram">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="1.5"
+             stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+        </svg>
+      </a>
+      <a href="https://x.com/lorelandapp" target="_blank" rel="noopener"
+         class="ig-link" aria-label="Loreland on X">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24"
+             fill="currentColor">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      </a>
+    </div>
 
     <!-- About card (col 1) -->
     <div class="card-desktop" id="cardAboutD" style="left:0; width:25%;">
@@ -608,16 +623,25 @@
   <!-- Hero sits outside grid, overlaid on full page width -->
   <div class="hero-mobile" id="heroMobile">LORELAND</div>
 
-  <a href="https://www.instagram.com/lorelandapp/" target="_blank" rel="noopener"
-     id="ig-mobile" class="ig-link ig-link-mobile" aria-label="Loreland on Instagram">
-    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24"
-         fill="none" stroke="currentColor" stroke-width="1.5"
-         stroke-linecap="round" stroke-linejoin="round">
-      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-      <circle cx="12" cy="12" r="4"/>
-      <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
-    </svg>
-  </a>
+  <div id="social-mobile" class="social-icons social-icons-mobile">
+    <a href="https://www.instagram.com/lorelandapp/" target="_blank" rel="noopener"
+       class="ig-link" aria-label="Loreland on Instagram">
+      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24"
+           fill="none" stroke="currentColor" stroke-width="1.5"
+           stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+        <circle cx="12" cy="12" r="4"/>
+        <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+      </svg>
+    </a>
+    <a href="https://x.com/lorelandapp" target="_blank" rel="noopener"
+       class="ig-link" aria-label="Loreland on X">
+      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24"
+           fill="currentColor">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+      </svg>
+    </a>
+  </div>
 
   <div class="grid-mobile" id="gridMobile">
 
@@ -710,7 +734,7 @@ function positionHeroDesktop() {
   const topPos = topOfLowerThird + (lowerThirdH - fs) / 2;
   heroD.style.top = topPos + 'px';
   heroD.dataset.fullTop = topPos;
-  const igD = document.getElementById('ig-desktop');
+  const igD = document.getElementById('social-desktop');
   if (igD) {
     const hRect = heroD.getBoundingClientRect();
     const pRect = document.getElementById('pageDesktop').getBoundingClientRect();
@@ -805,7 +829,7 @@ function positionHeroMobile() {
   const top = (gridRect.top - pageRect.top) + rowH - (fs * 0.7);
   heroM.style.top = top + 'px';
   heroM.dataset.fullTop = top;
-  const igM = document.getElementById('ig-mobile');
+  const igM = document.getElementById('social-mobile');
   if (igM) {
     const hRect = heroM.getBoundingClientRect();
     const pRect = pageMobile.getBoundingClientRect();
@@ -815,12 +839,12 @@ function positionHeroMobile() {
 
 function hideHeroMobile() {
   heroM.classList.add('hidden');
-  document.getElementById('ig-mobile')?.classList.add('hidden');
+  document.getElementById('social-mobile')?.classList.add('hidden');
 }
 
 function showHeroMobile() {
   heroM.classList.remove('hidden');
-  document.getElementById('ig-mobile')?.classList.remove('hidden');
+  document.getElementById('social-mobile')?.classList.remove('hidden');
 }
 
 function restoreHeroMobile() {
