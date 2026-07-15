@@ -484,6 +484,29 @@
   }
   .exp-cta-mobile:hover { opacity: 0.7; }
 
+  .hero-cta-mobile {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 15;
+    transition: opacity 0.4s ease;
+  }
+  .hero-cta-mobile.hidden { opacity: 0; pointer-events: none; }
+  .cta-listen-btn {
+    display: block;
+    background: none;
+    border: none;
+    color: #ebebeb;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: clamp(1.2rem, 5vw, 1.5rem);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    padding: 0.3rem 0.6rem;
+  }
+
   .social-icons {
     position: absolute;
     left: 50%;
@@ -693,6 +716,11 @@
         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
       </svg>
     </a>
+  </div>
+
+  <div id="cta-mobile" class="hero-cta-mobile">
+    <a href="https://loreland-eight.vercel.app" target="_blank" rel="noopener"
+       class="cta-listen-btn">Listen</a>
   </div>
 
   <div class="grid-mobile" id="gridMobile">
@@ -909,18 +937,23 @@ function positionHeroMobile() {
   if (igM) {
     const hRect = heroM.getBoundingClientRect();
     const pRect = pageMobile.getBoundingClientRect();
-    igM.style.top = (hRect.bottom - pRect.top + 10) + 'px';
+    const socialTop = hRect.bottom - pRect.top + 10;
+    igM.style.top = socialTop + 'px';
+    const ctaM = document.getElementById('cta-mobile');
+    if (ctaM) ctaM.style.top = (socialTop + igM.offsetHeight + 14) + 'px';
   }
 }
 
 function hideHeroMobile() {
   heroM.classList.add('hidden');
   document.getElementById('social-mobile')?.classList.add('hidden');
+  document.getElementById('cta-mobile')?.classList.add('hidden');
 }
 
 function showHeroMobile() {
   heroM.classList.remove('hidden');
   document.getElementById('social-mobile')?.classList.remove('hidden');
+  document.getElementById('cta-mobile')?.classList.remove('hidden');
 }
 
 function restoreHeroMobile() {
