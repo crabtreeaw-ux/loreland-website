@@ -431,6 +431,10 @@
   /* Base size intentionally large — JS will scale down for longer content */
 
   .card-panel p + p { margin-top: 1.1em; }
+  .faq-pair { margin-bottom: 1.8em; }
+  .faq-pair:last-child { margin-bottom: 0; }
+  .faq-pair ol { margin-top: 0.5em; padding-left: 1.4em; }
+  .faq-pair ol li + li { margin-top: 0.25em; }
 
   /* Caret — always fixed at bottom right of card, never moves */
   .card-caret-mobile {
@@ -564,23 +568,40 @@
       </div>
     </div>
 
-    <!-- Experience card (col 2) -->
-    <div class="card-desktop" id="cardExperienceD" style="left:25%; width:25%;">
+    <!-- Narrative AR card (col 2) -->
+    <div class="card-desktop" id="cardNarrativeD" style="left:25%; width:25%;">
       <div class="card-content-desktop">
-        <p>You're one of the first to step inside Loreland. What follows is an early prototype, just a glimpse of what's coming. Press play right where you are. That's the whole idea.</p>
-        <p>Once you've heard a story, a few quick questions will help shape what Loreland becomes next.</p>
-        <div class="qr-wrap">
-          <img src="qr-code.png" alt="QR code to experience Loreland prototype">
-        </div>
-        <p>Scan to begin, or follow the link below.<br>
-        <a href="https://loreland-eight.vercel.app" target="_blank" rel="noopener" class="exp-link">loreland-eight.vercel.app</a></p>
+        <p>Narrative Augmented Reality (Narrative AR) is a new form of storytelling that augments the world not with digital graphics, but with imagination. Instead of placing virtual objects on a screen, Loreland layers AI-generated narratives onto the real places around you, using your location, the surrounding landscape, weather, time of day, and atmosphere as the foundation for each story. The physical world becomes the stage, while your imagination does the rest. A quiet neighborhood, a parking lot, or the trail you walk every day suddenly carries mystery, tension, and possibility. By transforming familiar places into living settings for immersive stories, Narrative AR introduces a new way to experience both storytelling and the world itself.</p>
       </div>
     </div>
 
-    <!-- Narrative AR card (col 3) -->
-    <div class="card-desktop" id="cardNarrativeD" style="left:50%; width:25%;">
+    <!-- FAQ card (col 3) -->
+    <div class="card-desktop" id="cardFaqD" style="left:50%; width:25%;">
       <div class="card-content-desktop">
-        <p>Narrative Augmented Reality (Narrative AR) is a new form of storytelling that augments the world not with digital graphics, but with imagination. Instead of placing virtual objects on a screen, Loreland layers AI-generated narratives onto the real places around you, using your location, the surrounding landscape, weather, time of day, and atmosphere as the foundation for each story. The physical world becomes the stage, while your imagination does the rest. A quiet neighborhood, a parking lot, or the trail you walk every day suddenly carries mystery, tension, and possibility. By transforming familiar places into living settings for immersive stories, Narrative AR introduces a new way to experience both storytelling and the world itself.</p>
+        <div class="faq-pair">
+          <p><strong>How does it work?</strong></p>
+          <ol>
+            <li>Allow location access.</li>
+            <li>Choose a horror genre.</li>
+            <li>Listen to a story inspired by where you're standing.</li>
+          </ol>
+        </div>
+        <div class="faq-pair">
+          <p><strong>Do I need to download anything?</strong></p>
+          <p>No.</p>
+        </div>
+        <div class="faq-pair">
+          <p><strong>Will I hear the same story twice?</strong></p>
+          <p>No. Every story is generated uniquely for your location, so each listening experience is different.</p>
+        </div>
+        <div class="faq-pair">
+          <p><strong>How long is each story?</strong></p>
+          <p>About two minutes.</p>
+        </div>
+        <div class="faq-pair">
+          <p><strong>Do I have to be somewhere spooky?</strong></p>
+          <p>No. Loreland works anywhere — from a grocery store to an airport, neighborhood park, office building, or hiking trail.</p>
+        </div>
       </div>
     </div>
 
@@ -601,12 +622,12 @@
       <button class="nav-close-desktop" id="closeAboutD" onclick="closeCardDesktop('about')">✕</button>
     </div>
     <div class="nav-item-desktop">
-      <button onclick="openCardDesktop('experience')">experience</button>
-      <button class="nav-close-desktop" id="closeExperienceD" onclick="closeCardDesktop('experience')">✕</button>
-    </div>
-    <div class="nav-item-desktop">
       <button onclick="openCardDesktop('narrative')">narrative AR</button>
       <button class="nav-close-desktop" id="closeNarrativeD" onclick="closeCardDesktop('narrative')">✕</button>
+    </div>
+    <div class="nav-item-desktop">
+      <button onclick="openCardDesktop('faq')">FAQ</button>
+      <button class="nav-close-desktop" id="closeFaqD" onclick="closeCardDesktop('faq')">✕</button>
     </div>
     <div class="nav-item-desktop">
       <button onclick="openCardDesktop('contact')">contact</button>
@@ -678,16 +699,37 @@
           <p>Loreland is a location-aware storytelling app that creates original horror stories inspired by your immediate surroundings. Open the app anywhere, press play, and hear an eerie tale that unfolds right where you're standing. Waiting for your coffee. Walking through your neighborhood. Sitting in the break room. Resting at a highway pull-off. Even the most familiar places can become strangely unfamiliar. Each story is uniquely crafted using your hyper-local environment as inspiration, transforming ordinary moments into unsettling encounters filled with mystery, uncanny events, and lingering suspense.</p>
         </div>
 
-        <!-- Experience panel -->
-        <div class="card-panel" id="panelExperience">
-          <p>You're one of the first to step inside Loreland. What follows is an early prototype, just a glimpse of what's coming. Press play right where you are. That's the whole idea.</p>
-          <p>Once you've heard a story, a few quick questions will help shape what Loreland becomes next.</p>
-          <a href="https://loreland-eight.vercel.app" target="_blank" rel="noopener" class="exp-cta-mobile">Experience the prototype</a>
-        </div>
-
         <!-- Narrative AR panel -->
         <div class="card-panel" id="panelNarrative">
           <p>Narrative Augmented Reality (Narrative AR) is a new form of storytelling that augments the world not with digital graphics, but with imagination. Instead of placing virtual objects on a screen, Loreland layers AI-generated narratives onto the real places around you, using your location, the surrounding landscape, weather, time of day, and atmosphere as the foundation for each story. The physical world becomes the stage, while your imagination does the rest. A quiet neighborhood, a parking lot, or the trail you walk every day suddenly carries mystery, tension, and possibility. By transforming familiar places into living settings for immersive stories, Narrative AR introduces a new way to experience both storytelling and the world itself.</p>
+        </div>
+
+        <!-- FAQ panel -->
+        <div class="card-panel" id="panelFaq">
+          <div class="faq-pair">
+            <p><strong>How does it work?</strong></p>
+            <ol>
+              <li>Allow location access.</li>
+              <li>Choose a horror genre.</li>
+              <li>Listen to a story inspired by where you're standing.</li>
+            </ol>
+          </div>
+          <div class="faq-pair">
+            <p><strong>Do I need to download anything?</strong></p>
+            <p>No.</p>
+          </div>
+          <div class="faq-pair">
+            <p><strong>Will I hear the same story twice?</strong></p>
+            <p>No. Every story is generated uniquely for your location, so each listening experience is different.</p>
+          </div>
+          <div class="faq-pair">
+            <p><strong>How long is each story?</strong></p>
+            <p>About two minutes.</p>
+          </div>
+          <div class="faq-pair">
+            <p><strong>Do I have to be somewhere spooky?</strong></p>
+            <p>No. Loreland works anywhere — from a grocery store to an airport, neighborhood park, office building, or hiking trail.</p>
+          </div>
         </div>
 
       </div><!-- /card-carousel -->
@@ -697,8 +739,8 @@
 
   <div class="nav-mobile">
     <button data-section="about" onclick="openMobileSection('about')">about</button>
-    <button data-section="experience" onclick="openMobileSection('experience')">experience</button>
     <button data-section="narrative" onclick="openMobileSection('narrative')">narrative AR</button>
+    <button data-section="faq" onclick="openMobileSection('faq')">FAQ</button>
     <button onclick="mobileContact()">contact</button>
   </div>
 
@@ -743,7 +785,7 @@ function positionHeroDesktop() {
 }
 
 function getDesktopCard(name) {
-  const map = { about: 'cardAboutD', experience: 'cardExperienceD', narrative: 'cardNarrativeD', contact: 'cardContactD' };
+  const map = { about: 'cardAboutD', faq: 'cardFaqD', narrative: 'cardNarrativeD', contact: 'cardContactD' };
   return document.getElementById(map[name]);
 }
 
@@ -754,7 +796,7 @@ function setCardHeights() {
 }
 
 function getDesktopCloseBtn(name) {
-  const map = { about: 'closeAboutD', experience: 'closeExperienceD', narrative: 'closeNarrativeD', contact: 'closeContactD' };
+  const map = { about: 'closeAboutD', faq: 'closeFaqD', narrative: 'closeNarrativeD', contact: 'closeContactD' };
   return map[name] ? document.getElementById(map[name]) : null;
 }
 
@@ -811,8 +853,8 @@ let activeMobileSection = null;
 
 const panels = {
   about: document.getElementById('panelAbout'),
-  experience: document.getElementById('panelExperience'),
-  narrative: document.getElementById('panelNarrative')
+  narrative: document.getElementById('panelNarrative'),
+  faq: document.getElementById('panelFaq')
 };
 
 function positionHeroMobile() {
