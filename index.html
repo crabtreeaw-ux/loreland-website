@@ -496,6 +496,27 @@
   .social-icons-desktop { z-index: 10; }
   .social-icons-mobile  { z-index: 15; }
   .social-icons-mobile.hidden { opacity: 0; pointer-events: none; }
+  .hero-cta-desktop {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero-cta-desktop .cta-label {
+    font-family: 'Rubik Glitch', cursive;
+    font-size: 0.95rem;
+    color: #ebebeb;
+    letter-spacing: 0.12em;
+    white-space: nowrap;
+  }
+  .hero-cta-desktop img {
+    width: 96px;
+    height: 96px;
+  }
   .ig-link {
     color: #ebebeb;
     text-decoration: none;
@@ -564,6 +585,11 @@
           <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
         </svg>
       </a>
+    </div>
+
+    <div id="cta-desktop" class="hero-cta-desktop">
+      <span class="cta-label">start here</span>
+      <img src="qr-code.png" alt="QR code — scan to experience Loreland" width="96" height="96">
     </div>
 
     <!-- About card (col 1) -->
@@ -785,7 +811,10 @@ function positionHeroDesktop() {
   if (igD) {
     const hRect = heroD.getBoundingClientRect();
     const pRect = document.getElementById('pageDesktop').getBoundingClientRect();
-    igD.style.top = (hRect.bottom - pRect.top + 10) + 'px';
+    const socialTop = hRect.bottom - pRect.top + 10;
+    igD.style.top = socialTop + 'px';
+    const ctaD = document.getElementById('cta-desktop');
+    if (ctaD) ctaD.style.top = (socialTop + igD.offsetHeight + 14) + 'px';
   }
 }
 
