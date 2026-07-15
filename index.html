@@ -228,6 +228,9 @@
 
   .card-content-desktop p + p { margin-top: 1.1em; }
 
+  /* FAQ card: anchor to top, don't center (content is too long) */
+  #cardFaqD .card-content-desktop { justify-content: flex-start; }
+
   /* Contact card: center both vertically and horizontally */
   #cardContactD .card-content-desktop {
     align-items: center;
@@ -433,6 +436,7 @@
   .card-panel p + p { margin-top: 1.1em; }
   .faq-pair { margin-bottom: 1.8em; }
   .faq-pair:last-child { margin-bottom: 0; }
+  .faq-pair p + p { margin-top: 0.25em; }
   .faq-pair ol { margin-top: 0.5em; padding-left: 1.4em; }
   .faq-pair ol li + li { margin-top: 0.25em; }
 
