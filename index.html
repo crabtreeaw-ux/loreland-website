@@ -536,6 +536,13 @@
     color: #ebebeb;
     letter-spacing: 0.12em;
     white-space: nowrap;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.15s ease;
+  }
+  .hero-cta-desktop .cta-label:hover {
+    color: #ffffff;
+    text-decoration: underline;
   }
   .hero-cta-desktop img {
     width: 96px;
@@ -612,7 +619,8 @@
     </div>
 
     <div id="cta-desktop" class="hero-cta-desktop">
-      <span class="cta-label">start here</span>
+      <a href="https://loreland-eight.vercel.app" target="_blank" rel="noopener"
+         class="cta-label">start here</a>
       <img src="qr-code.png" alt="QR code — scan to experience Loreland" width="96" height="96">
     </div>
 
