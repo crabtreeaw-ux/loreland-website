@@ -235,8 +235,7 @@
   #cardContactD .card-content-desktop { justify-content: flex-start; }
 
   /* ── Feedback form (desktop card + mobile panel) ── */
-  .fb-intro { margin-bottom: 1.4em; font-size: 0.88em; opacity: 0.75; line-height: 1.55; }
-  .fb-heading { font-weight: 700; font-size: 1.05em; margin-bottom: 1.2em; }
+  .fb-intro { margin-bottom: 1.4em; font-size: 0.88em; line-height: 1.55; }
   .fb-q { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.2em; }
   .fb-q label { font-weight: 700; font-size: 0.95em; }
   .fb-q textarea,
@@ -249,6 +248,8 @@
     font-size: 0.9em;
     padding: 0.5rem 0.6rem;
     resize: vertical;
+    width: 100%;
+    box-sizing: border-box;
   }
   .fb-q textarea:focus,
   .fb-q input[type="email"]:focus { outline: none; border-color: rgba(235,235,235,0.6); }
@@ -267,7 +268,7 @@
   .fb-submit {
     margin-top: 0.6em;
     background: none;
-    border: 1px solid rgba(235,235,235,0.4);
+    border: 1px solid #ebebeb;
     border-radius: 4px;
     color: #ebebeb;
     font-family: 'Roboto', sans-serif;
@@ -277,7 +278,7 @@
     padding: 0.5rem 1.2rem;
     cursor: pointer;
   }
-  .fb-submit:hover { border-color: #ebebeb; }
+  .fb-submit:hover { border-color: #ffffff; color: #ffffff; }
   .fb-submit:disabled { opacity: 0.4; cursor: not-allowed; }
   .fb-thanks { display: none; margin-top: 0.8em; font-size: 0.9em; opacity: 0.75; }
   .fb-thanks.active { display: block; }
@@ -717,7 +718,6 @@
     <div class="card-desktop" id="cardContactD" style="left:75%; width:25%;">
       <div class="card-content-desktop">
         <p class="fb-intro">Your feedback directly shapes what Loreland becomes next. The short questionnaire below only takes a minute, and it's the single most helpful thing you can do to help this grow into a fully-featured app.</p>
-        <p class="fb-heading">Thank you for providing feedback!</p>
         <div class="fb-q">
           <label>How would you describe the experience in your own words?</label>
           <textarea rows="3" placeholder="A sentence or two…"></textarea>
@@ -881,8 +881,7 @@
         <!-- Feedback panel -->
         <div class="card-panel" id="panelContact">
           <p class="fb-intro">Your feedback directly shapes what Loreland becomes next. The short questionnaire below only takes a minute, and it's the single most helpful thing you can do to help this grow into a fully-featured app.</p>
-          <p class="fb-heading">Thank you for providing feedback!</p>
-          <div class="fb-q">
+            <div class="fb-q">
             <label>How would you describe the experience in your own words?</label>
             <textarea rows="3" placeholder="A sentence or two…"></textarea>
           </div>
@@ -1195,6 +1194,16 @@ function closeMobileCard() {
   }, 200);
 }
 
+
+// ─── FEEDBACK TOGGLES ────────────────────────────────────────
+document.querySelectorAll('.fb-toggle-row').forEach(row => {
+  row.addEventListener('click', e => {
+    const btn = e.target.closest('.fb-toggle-btn');
+    if (!btn) return;
+    row.querySelectorAll('.fb-toggle-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+  });
+});
 
 // ─── INIT ─────────────────────────────────────────────────────
 
