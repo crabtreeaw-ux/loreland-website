@@ -231,11 +231,56 @@
   /* FAQ card: anchor to top, don't center (content is too long) */
   #cardFaqD .card-content-desktop { justify-content: flex-start; }
 
-  /* Contact card: center both vertically and horizontally */
-  #cardContactD .card-content-desktop {
-    align-items: center;
-    text-align: center;
+  /* Feedback card: anchor to top (content is long) */
+  #cardContactD .card-content-desktop { justify-content: flex-start; }
+
+  /* ── Feedback form (desktop card + mobile panel) ── */
+  .fb-intro { margin-bottom: 1.4em; font-size: 0.88em; opacity: 0.75; line-height: 1.55; }
+  .fb-heading { font-weight: 700; font-size: 1.05em; margin-bottom: 1.2em; }
+  .fb-q { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.2em; }
+  .fb-q label { font-weight: 700; font-size: 0.95em; }
+  .fb-q textarea,
+  .fb-q input[type="email"] {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(235,235,235,0.25);
+    border-radius: 4px;
+    color: #ebebeb;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.9em;
+    padding: 0.5rem 0.6rem;
+    resize: vertical;
   }
+  .fb-q textarea:focus,
+  .fb-q input[type="email"]:focus { outline: none; border-color: rgba(235,235,235,0.6); }
+  .fb-toggle-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .fb-toggle-btn {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(235,235,235,0.3);
+    border-radius: 4px;
+    color: #ebebeb;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.9em;
+    padding: 0.35rem 0.75rem;
+    cursor: pointer;
+  }
+  .fb-toggle-btn.selected { border-color: #ebebeb; background: rgba(235,235,235,0.15); }
+  .fb-submit {
+    margin-top: 0.6em;
+    background: none;
+    border: 1px solid rgba(235,235,235,0.4);
+    border-radius: 4px;
+    color: #ebebeb;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.9em;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.5rem 1.2rem;
+    cursor: pointer;
+  }
+  .fb-submit:hover { border-color: #ebebeb; }
+  .fb-submit:disabled { opacity: 0.4; cursor: not-allowed; }
+  .fb-thanks { display: none; margin-top: 0.8em; font-size: 0.9em; opacity: 0.75; }
+  .fb-thanks.active { display: block; }
 
 
   /* QR code */
@@ -668,11 +713,44 @@
       </div>
     </div>
 
-    <!-- Contact card (col 4) -->
+    <!-- Feedback card (col 4) -->
     <div class="card-desktop" id="cardContactD" style="left:75%; width:25%;">
       <div class="card-content-desktop">
-        <p>Got questions?</p>
-        <p><a href="mailto:crabtreeaw@gmail.com?subject=Hey%20Loreland!" target="_blank" rel="noopener" class="exp-link">Contact us</a></p>
+        <p class="fb-intro">Your feedback directly shapes what Loreland becomes next. The short questionnaire below only takes a minute, and it's the single most helpful thing you can do to help this grow into a fully-featured app.</p>
+        <p class="fb-heading">Thank you for providing feedback!</p>
+        <div class="fb-q">
+          <label>How would you describe the experience in your own words?</label>
+          <textarea rows="3" placeholder="A sentence or two…"></textarea>
+        </div>
+        <div class="fb-q">
+          <label>How likely are you to use this on a regular basis? (1 = unlikely, 5 = definitely)</label>
+          <div class="fb-toggle-row">
+            <button class="fb-toggle-btn" data-value="1">1</button>
+            <button class="fb-toggle-btn" data-value="2">2</button>
+            <button class="fb-toggle-btn" data-value="3">3</button>
+            <button class="fb-toggle-btn" data-value="4">4</button>
+            <button class="fb-toggle-btn" data-value="5">5</button>
+          </div>
+        </div>
+        <div class="fb-q">
+          <label>What feels like a fair monthly price?</label>
+          <div class="fb-toggle-row">
+            <button class="fb-toggle-btn" data-value="0">$0</button>
+            <button class="fb-toggle-btn" data-value="3">$3</button>
+            <button class="fb-toggle-btn" data-value="5">$5</button>
+            <button class="fb-toggle-btn" data-value="10">$10</button>
+          </div>
+        </div>
+        <div class="fb-q">
+          <label>Who's the first person you'd share this with, and why?</label>
+          <textarea rows="2" placeholder="A friend who loves horror? Your partner?"></textarea>
+        </div>
+        <div class="fb-q">
+          <label>Want to be a beta tester when Loreland launches?</label>
+          <input type="email" placeholder="your@email.com" autocomplete="email" />
+        </div>
+        <button class="fb-submit" disabled>Submit Feedback</button>
+        <p class="fb-thanks">Thanks for your feedback!</p>
       </div>
     </div>
 
@@ -693,7 +771,7 @@
       <button class="nav-close-desktop" id="closeFaqD" onclick="closeCardDesktop('faq')">✕</button>
     </div>
     <div class="nav-item-desktop">
-      <button onclick="openCardDesktop('contact')">contact</button>
+      <button onclick="openCardDesktop('contact')">feedback</button>
       <button class="nav-close-desktop" id="closeContactD" onclick="closeCardDesktop('contact')">✕</button>
     </div>
   </div>
@@ -800,6 +878,45 @@
           </div>
         </div>
 
+        <!-- Feedback panel -->
+        <div class="card-panel" id="panelContact">
+          <p class="fb-intro">Your feedback directly shapes what Loreland becomes next. The short questionnaire below only takes a minute, and it's the single most helpful thing you can do to help this grow into a fully-featured app.</p>
+          <p class="fb-heading">Thank you for providing feedback!</p>
+          <div class="fb-q">
+            <label>How would you describe the experience in your own words?</label>
+            <textarea rows="3" placeholder="A sentence or two…"></textarea>
+          </div>
+          <div class="fb-q">
+            <label>How likely are you to use this on a regular basis? (1 = unlikely, 5 = definitely)</label>
+            <div class="fb-toggle-row">
+              <button class="fb-toggle-btn" data-value="1">1</button>
+              <button class="fb-toggle-btn" data-value="2">2</button>
+              <button class="fb-toggle-btn" data-value="3">3</button>
+              <button class="fb-toggle-btn" data-value="4">4</button>
+              <button class="fb-toggle-btn" data-value="5">5</button>
+            </div>
+          </div>
+          <div class="fb-q">
+            <label>What feels like a fair monthly price?</label>
+            <div class="fb-toggle-row">
+              <button class="fb-toggle-btn" data-value="0">$0</button>
+              <button class="fb-toggle-btn" data-value="3">$3</button>
+              <button class="fb-toggle-btn" data-value="5">$5</button>
+              <button class="fb-toggle-btn" data-value="10">$10</button>
+            </div>
+          </div>
+          <div class="fb-q">
+            <label>Who's the first person you'd share this with, and why?</label>
+            <textarea rows="2" placeholder="A friend who loves horror? Your partner?"></textarea>
+          </div>
+          <div class="fb-q">
+            <label>Want to be a beta tester when Loreland launches?</label>
+            <input type="email" placeholder="your@email.com" autocomplete="email" />
+          </div>
+          <button class="fb-submit" disabled>Submit Feedback</button>
+          <p class="fb-thanks">Thanks for your feedback!</p>
+        </div>
+
       </div><!-- /card-carousel -->
     </div><!-- /card-mobile -->
 
@@ -809,7 +926,7 @@
     <button data-section="about" onclick="openMobileSection('about')">about</button>
     <button data-section="narrative" onclick="openMobileSection('narrative')">narrative AR</button>
     <button data-section="faq" onclick="openMobileSection('faq')">FAQ</button>
-    <button onclick="mobileContact()">contact</button>
+    <button data-section="contact" onclick="openMobileSection('contact')">feedback</button>
   </div>
 
 </div><!-- /page-mobile -->
@@ -925,7 +1042,8 @@ let activeMobileSection = null;
 const panels = {
   about: document.getElementById('panelAbout'),
   narrative: document.getElementById('panelNarrative'),
-  faq: document.getElementById('panelFaq')
+  faq: document.getElementById('panelFaq'),
+  contact: document.getElementById('panelContact')
 };
 
 function positionHeroMobile() {
@@ -1077,9 +1195,6 @@ function closeMobileCard() {
   }, 200);
 }
 
-function mobileContact() {
-  window.open('mailto:crabtreeaw@gmail.com?subject=Hey%20Loreland!', '_blank');
-}
 
 // ─── INIT ─────────────────────────────────────────────────────
 
