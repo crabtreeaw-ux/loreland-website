@@ -235,6 +235,7 @@
   #cardContactD .card-content-desktop { justify-content: flex-start; }
 
   /* ── Feedback form (desktop card + mobile panel) ── */
+  .fb-creator-note { font-weight: 700; font-size: 0.95em; margin-bottom: 0.6em; }
   .fb-intro { margin-bottom: 1.4em; font-size: 0.88em; line-height: 1.55; }
   .fb-q { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.2em; }
   .fb-q label { font-weight: 700; font-size: 0.95em; }
@@ -717,6 +718,7 @@
     <!-- Feedback card (col 4) -->
     <div class="card-desktop" id="cardContactD" style="left:75%; width:25%;">
       <div class="card-content-desktop">
+        <p class="fb-creator-note">Every response is read by the creator.</p>
         <p class="fb-intro">Your feedback directly shapes what Loreland becomes next. The short questionnaire below only takes a minute, and it's the single most helpful thing you can do to help this grow into a fully-featured app.</p>
         <div class="fb-q">
           <label>How would you describe the experience in your own words?</label>
@@ -880,7 +882,8 @@
 
         <!-- Feedback panel -->
         <div class="card-panel" id="panelContact">
-          <p class="fb-intro">Your feedback directly shapes what Loreland becomes next. The short questionnaire below only takes a minute, and it's the single most helpful thing you can do to help this grow into a fully-featured app.</p>
+          <p class="fb-creator-note">Every response is read by the creator.</p>
+        <p class="fb-intro">Your feedback directly shapes what Loreland becomes next. The short questionnaire below only takes a minute, and it's the single most helpful thing you can do to help this grow into a fully-featured app.</p>
             <div class="fb-q">
             <label>How would you describe the experience in your own words?</label>
             <textarea rows="3" placeholder="A sentence or two…"></textarea>
