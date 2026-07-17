@@ -281,6 +281,7 @@
   }
   .fb-submit:hover { border-color: #ffffff; color: #ffffff; }
   .fb-submit:disabled { opacity: 0.4; cursor: not-allowed; }
+  .fb-error { font-size: 0.85em; color: #ff6b6b; margin-top: 0.5em; min-height: 1em; }
   .fb-thanks { display: none; margin-top: 0.8em; font-size: 0.9em; opacity: 0.75; }
   .fb-thanks.active { display: block; }
 
@@ -752,6 +753,7 @@
           <input type="email" placeholder="your@email.com" autocomplete="email" />
         </div>
         <button class="fb-submit">Submit Feedback</button>
+        <p class="fb-error"></p>
         <p class="fb-thanks">Thanks for your feedback!</p>
       </div>
     </div>
@@ -916,6 +918,7 @@
             <input type="email" placeholder="your@email.com" autocomplete="email" />
           </div>
           <button class="fb-submit">Submit Feedback</button>
+        <p class="fb-error"></p>
           <p class="fb-thanks">Thanks for your feedback!</p>
         </div>
 
@@ -1197,6 +1200,48 @@ function closeMobileCard() {
   }, 200);
 }
 
+
+// ─── FEEDBACK SUBMISSION ──────────────────────────────────────
+function submitFeedback(container) {
+  const textareas  = container.querySelectorAll('textarea');
+  const toggleRows = container.querySelectorAll('.fb-toggle-row');
+  const submitBtn  = container.querySelector('.fb-submit');
+  const thanksEl   = container.querySelector('.fb-thanks');
+  const errorEl    = container.querySelector('.fb-error');
+
+  const body = {
+    experienceDescription: textareas[0]?.value.trim() ?? '',
+    shareWith:             textareas[1]?.value.trim() ?? '',
+    regularBasisRating:    toggleRows[0]?.querySelector('.fb-toggle-btn.selected')?.dataset.value ?? null,
+    fairPrice:             toggleRows[1]?.querySelector('.fb-toggle-btn.selected')?.dataset.value ?? null,
+    betaTesterEmail:       container.querySelector('input[type="email"]')?.value.trim() ?? '',
+  };
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Submitting…';
+  errorEl.textContent = '';
+
+  fetch('/api/feedback', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  })
+    .then(res => {
+      if (!res.ok) throw new Error(`Server error ${res.status}`);
+      submitBtn.style.display = 'none';
+      thanksEl.classList.add('active');
+    })
+    .catch(() => {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit Feedback';
+      errorEl.textContent = 'Something went wrong — please try again.';
+    });
+}
+
+document.getElementById('cardContactD').querySelector('.fb-submit')
+  .addEventListener('click', () => submitFeedback(document.getElementById('cardContactD')));
+document.getElementById('panelContact').querySelector('.fb-submit')
+  .addEventListener('click', () => submitFeedback(document.getElementById('panelContact')));
 
 // ─── FEEDBACK TOGGLES ─────────────────────────────────────────
 document.querySelectorAll('.fb-toggle-row').forEach(row => {
