@@ -576,21 +576,24 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 16px;
   }
   .hero-cta-desktop .cta-label {
     font-family: 'Rubik Glitch', cursive;
     font-size: 1.6rem;
-    color: #ebebeb;
+    color: #ffffff;
     letter-spacing: 0.12em;
     white-space: nowrap;
     text-decoration: none;
     cursor: pointer;
-    transition: color 0.15s ease;
+    background: #8b1a1a;
+    border: 1.5px solid #ffffff;
+    border-radius: 999px;
+    padding: 0.55rem 1.6rem;
+    transition: background 0.15s ease;
   }
   .hero-cta-desktop .cta-label:hover {
-    color: #ffffff;
-    text-decoration: underline;
+    background: #a82020;
   }
   .hero-cta-desktop img {
     width: 96px;
@@ -668,7 +671,7 @@
 
     <div id="cta-desktop" class="hero-cta-desktop">
       <a href="https://loreland-eight.vercel.app" target="_blank" rel="noopener"
-         class="cta-label">listen here</a>
+         class="cta-label">▶ listen here</a>
       <img src="qr-code.png" alt="QR code — scan to experience Loreland" width="96" height="96">
     </div>
 
