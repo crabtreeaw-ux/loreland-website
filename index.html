@@ -535,13 +535,16 @@
   .hero-cta-mobile {
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) translateY(-50%);
     z-index: 15;
     transition: opacity 0.4s ease;
   }
   .hero-cta-mobile.hidden { opacity: 0; pointer-events: none; }
   .cta-listen-btn {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45em;
     background: #8b1a1a;
     border: 1.5px solid #ffffff;
     border-radius: 26px;
@@ -815,7 +818,7 @@
 
   <div id="cta-mobile" class="hero-cta-mobile">
     <a href="https://loreland-eight.vercel.app" target="_blank" rel="noopener"
-       class="cta-listen-btn">▶ Listen</a>
+       class="cta-listen-btn"><svg aria-hidden="true" style="height:0.75em;width:auto;flex-shrink:0" viewBox="0 0 10 12" fill="none"><polygon points="1,1 9,6 1,11" stroke="#ffffff" stroke-width="1.5" stroke-linejoin="round"/></svg>Listen</a>
   </div>
 
   <div class="grid-mobile" id="gridMobile">
@@ -1076,7 +1079,7 @@ function positionHeroMobile() {
     const socialTop = hRect.bottom - pRect.top + 10;
     igM.style.top = socialTop + 'px';
     const ctaM = document.getElementById('cta-mobile');
-    if (ctaM) ctaM.style.top = (socialTop + igM.offsetHeight + 32) + 'px';
+    if (ctaM) ctaM.style.top = (gridRect.top - pRect.top + 3 * rowH) + 'px';
   }
 }
 
