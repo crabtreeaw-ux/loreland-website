@@ -1,731 +1,356 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Loreland | Scary Stories Inspired by Where You're Standing</title>
-<meta name="description" content="Loreland creates original horror stories inspired by where you're standing, transforming ordinary places into eerie, immersive storytelling experiences.">
-<link rel="canonical" href="https://lorelandapp.com/">
-<meta name="robots" content="index, follow">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loreland — Staging</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Glitch&family=Roboto:wght@300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-<!-- Open Graph -->
-<meta property="og:title" content="Loreland | Scary Stories Inspired by Where You're Standing">
-<meta property="og:description" content="Open Loreland anywhere, press play, and hear an original horror story inspired by where you're standing.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://lorelandapp.com/">
-<meta property="og:site_name" content="Loreland">
-<meta property="og:image" content="https://lorelandapp.com/Loreland_Gas_Station.jpg">
-<meta property="og:image:width" content="500">
-<meta property="og:image:height" content="500">
-<meta property="og:image:alt" content="An empty gas station at night — moody promotional image for Loreland, a horror storytelling app.">
-
-<!-- Twitter / X Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Loreland | Scary Stories Inspired by Where You're Standing">
-<meta name="twitter:description" content="Original horror stories inspired by where you're standing.">
-<meta name="twitter:image" content="https://lorelandapp.com/Loreland_Gas_Station.jpg">
-
-<!-- JSON-LD -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": ["WebSite", "WebApplication"],
-  "name": "Loreland",
-  "url": "https://lorelandapp.com/",
-  "description": "Loreland is a location-aware horror storytelling experience that creates original horror stories inspired by where you're standing.",
-  "applicationCategory": "EntertainmentApplication",
-  "operatingSystem": "Web"
-}
-</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Rubik+Glitch&family=Roboto:wght@300;700&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html, body {
-    background: #000;
-    color: #ebebeb;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
-    overflow: hidden;
-    height: 100%;
-    width: 100%;
-  }
-
-  /* ─── DESKTOP LAYOUT (> 768px) ─── */
-
-  .page-desktop {
-    display: none;
-    flex-direction: column;
-    height: 100vh;
-    width: 100vw;
-    background: #000;
-    overflow: hidden;
-  }
-
-  /* Image grid top section */
-  .grid-desktop {
-    position: relative;
-    flex: 1;
-    min-height: 0;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    overflow: hidden;
-  }
-
-  .grid-desktop .img-cell {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
-  }
-
-  .grid-desktop .img-cell img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  /* Dark overlay covering the entire image grid */
-  .grid-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.37);
-    pointer-events: none;
-    z-index: 2;
-  }
-
-  /* Hero */
-  .hero-desktop {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10;
-    font-family: 'Rubik Glitch', cursive;
-    color: #ebebeb;
-    white-space: nowrap;
-    pointer-events: none;
-    user-select: none;
-    animation: heroGlitch 10s infinite;
-  }
-
-  @keyframes heroGlitch {
-    0%   { transform: translateX(-50%); text-shadow: none; }
-    92%  { transform: translateX(-50%); text-shadow: none; }
-    92.5% {
-      transform: translateX(calc(-50% + 3px)) skewX(-4deg);
-      text-shadow: -3px 0 #ff003c, 3px 0 #00f0ff;
+    html {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      overscroll-behavior: none;
+      background: #000;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
     }
-    93%  {
-      transform: translateX(calc(-50% - 4px)) skewX(3deg);
-      text-shadow: 3px 0 #ff003c, -3px 0 #00f0ff;
+    html::-webkit-scrollbar { display: none; width: 0; height: 0; }
+
+    body {
+      height: 100%;
+      overflow: hidden;
+      overscroll-behavior: none;
+      background: #000;
+      color: #ebebeb;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
     }
-    93.5% {
-      transform: translateX(calc(-50% + 2px)) skewX(-2deg);
-      text-shadow: -2px 0 #ff003c, 2px 0 #00f0ff;
+    body::-webkit-scrollbar { display: none; width: 0; height: 0; }
+
+    /* ─── Page layout ─── */
+    .page {
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+      background: #000;
     }
-    94%  {
-      transform: translateX(calc(-50% - 3px)) skewX(4deg);
-      text-shadow: 4px 0 #ff003c, -4px 0 #00f0ff;
+
+    /* ─── Content panel ─── */
+    .content-panel {
+      width: 42%;
+      min-width: 340px;
+      padding: 60px 48px 60px 88px;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex-shrink: 0;
     }
-    94.5% {
-      transform: translateX(calc(-50% + 1px)) skewX(-1deg);
-      text-shadow: -1px 0 #ff003c, 1px 0 #00f0ff;
+
+    /* ─── Image panel ─── */
+    .image-panel {
+      flex: 1;
+      overflow: hidden;
+      background: #000;
     }
-    95%  { transform: translateX(-50%); text-shadow: none; }
-    100% { transform: translateX(-50%); text-shadow: none; }
-  }
-
-  /* ─── DESKTOP NAV ─── */
-  .nav-desktop {
-    background: #000;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    align-items: center;
-    padding: 2.4rem 0;
-  }
-
-  .nav-desktop button {
-    justify-self: center;
-    background: none;
-    border: none;
-    color: #ebebeb;
-    font-family: 'Rubik Glitch', cursive;
-    font-size: 1.35rem;
-    cursor: pointer;
-    letter-spacing: 0.02em;
-    padding: 0.3rem 0.5rem;
-    transition: opacity 0.2s;
-  }
-
-  .nav-desktop button:hover { opacity: 0.7; }
-
-  /* Nav item wrapper — holds nav button and its X together */
-  .nav-item-desktop {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-  }
-
-  /* X close button — hidden until its card is open */
-  .nav-close-desktop {
-    background: none;
-    border: none;
-    color: #ebebeb;
-    font-family: 'Rubik Glitch', cursive;
-    font-size: 1rem;
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    padding: 0;
-    line-height: 1;
-    pointer-events: none;
-  }
-
-  .nav-close-desktop.visible {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  .nav-close-desktop:hover { opacity: 0.7 !important; }
-
-  /* ─── DESKTOP CARDS ─── */
-  .card-desktop {
-    position: absolute;
-    bottom: 0;
-    z-index: 20;
-    background: #000;
-    transform: translateY(100%);
-    transition: transform 0.55s ease;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .card-desktop.open { transform: translateY(0); }
-
-  .card-content-desktop {
-    padding: 2.4rem 2.2rem 2.2rem;
-    flex: 1;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    overflow-y: auto;
-    font-size: 1.3rem;
-    line-height: 1.75;
-    color: #ebebeb;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: left;
-  }
-
-  .card-desktop.content-visible .card-content-desktop { opacity: 1; }
-
-  .card-content-desktop p + p { margin-top: 1.1em; }
-
-  /* FAQ card: anchor to top, don't center (content is too long) */
-  #cardFaqD .card-content-desktop { justify-content: flex-start; }
-
-  /* Feedback card: anchor to top (content is long) */
-  #cardContactD .card-content-desktop { justify-content: flex-start; }
-
-  /* ── Feedback form (desktop card + mobile panel) ── */
-  .fb-creator-note { font-weight: 700; font-size: 0.95em; margin-bottom: 0.6em; }
-  .fb-intro { margin-bottom: 1.4em; font-size: 0.88em; line-height: 1.55; }
-  .fb-q { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.2em; }
-  .fb-q label { font-weight: 700; font-size: 0.95em; }
-  .fb-q textarea,
-  .fb-q input[type="email"] {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(235,235,235,0.25);
-    border-radius: 4px;
-    color: #ebebeb;
-    font-family: 'Roboto', sans-serif;
-    font-size: 0.9em;
-    padding: 0.5rem 0.6rem;
-    resize: vertical;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  .fb-q textarea:focus,
-  .fb-q input[type="email"]:focus { outline: none; border-color: rgba(235,235,235,0.6); }
-  .fb-toggle-row { display: flex; gap: 8px; flex-wrap: wrap; }
-  .fb-toggle-btn {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(235,235,235,0.3);
-    border-radius: 4px;
-    color: #ebebeb;
-    font-family: 'Roboto', sans-serif;
-    font-size: 0.9em;
-    padding: 0.35rem 0.75rem;
-    cursor: pointer;
-  }
-  .fb-toggle-btn.selected { border-color: #ebebeb; background: rgba(235,235,235,0.15); }
-  .fb-submit {
-    margin-top: 0.6em;
-    background: none;
-    border: 1px solid #ffffff;
-    border-radius: 4px;
-    color: #ffffff;
-    font-family: 'Roboto', sans-serif;
-    font-size: 0.9em;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 0.5rem 1.2rem;
-    cursor: pointer;
-  }
-  .fb-submit:hover { border-color: #ffffff; color: #ffffff; }
-  .fb-submit:disabled { opacity: 0.4; cursor: not-allowed; }
-  .fb-error { font-size: 0.85em; color: #ff6b6b; margin-top: 0.5em; min-height: 1em; }
-  .fb-thanks { display: none; margin-top: 0.8em; font-size: 0.9em; opacity: 0.75; }
-  .fb-thanks.active { display: block; }
-
-
-  /* QR code */
-  .qr-wrap {
-    margin: 3.2rem auto;
-    text-align: center;
-  }
-  .qr-wrap img {
-    width: 140px;
-    height: 140px;
-    display: block;
-    margin: 0 auto;
-  }
-
-  .exp-link {
-    color: #ebebeb;
-    text-decoration: underline;
-  }
-  .exp-link:hover { opacity: 0.7; }
-
-  /* ─── MOBILE LAYOUT (≤ 768px) ─── */
-
-  .page-mobile {
-    display: none;
-    flex-direction: column;
-    height: 100vh;
-    height: 100dvh;
-    width: 100%;
-    max-width: 100vw;
-    background: #000;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    position: relative;
-  }
-
-  .grid-mobile {
-    position: relative;
-    flex: 1;
-    min-height: 0;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-    overflow: hidden;
-  }
-
-  .grid-mobile .img-cell {
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
-  }
-
-  .grid-mobile .img-cell img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  /* Keep key subjects in frame at square crop ratios */
-
-
-  /* Hero mobile — sits as the very top layer, never hidden by cards */
-  .hero-mobile {
-    position: absolute;
-    left: 0;
-    right: 0;
-    z-index: 30;
-    font-family: 'Rubik Glitch', cursive;
-    color: #ebebeb;
-    white-space: nowrap;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
-    user-select: none;
-    animation: heroGlitchMobile 10s infinite;
-    text-align: center;
-    overflow: visible;
-  }
-
-  .hero-mobile.hidden {
-    opacity: 0;
-    animation-play-state: paused;
-  }
-
-  @keyframes heroGlitchMobile {
-    0%   { transform: none; text-shadow: none; }
-    92%  { transform: none; text-shadow: none; }
-    92.5% {
-      transform: translateX(3px) skewX(-4deg);
-      text-shadow: -3px 0 #ff003c, 3px 0 #00f0ff;
+    .image-panel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 54% 50%;
+      display: block;
     }
-    93%  {
-      transform: translateX(-4px) skewX(3deg);
-      text-shadow: 3px 0 #ff003c, -3px 0 #00f0ff;
+
+    /* ─── Wordmark ─── */
+    .wordmark {
+      font-family: 'Rubik Glitch', cursive;
+      font-size: clamp(3.5rem, 5vw, 6rem);
+      color: #ebebeb;
+      letter-spacing: 0.02em;
+      line-height: 1.05;
+      margin-bottom: 1.6rem;
+      user-select: none;
     }
-    93.5% {
-      transform: translateX(2px) skewX(-2deg);
-      text-shadow: -2px 0 #ff003c, 2px 0 #00f0ff;
+
+    /* ─── Description ─── */
+    .description {
+      font-size: 1.1rem;
+      line-height: 1.72;
+      color: #ebebeb;
+      margin-bottom: 1.75rem;
+      max-width: 38ch;
     }
-    94%  {
-      transform: translateX(-3px) skewX(4deg);
-      text-shadow: 4px 0 #ff003c, -4px 0 #00f0ff;
+
+    /* ─── Buttons ─── */
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 0.7rem;
     }
-    94.5% {
-      transform: translateX(1px) skewX(-1deg);
-      text-shadow: -1px 0 #ff003c, 1px 0 #00f0ff;
+    .buttons .btn:first-child { margin-bottom: 1.3rem; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55em;
+      padding: 0.55rem 1.3rem;
+      border: 1px solid #ebebeb;
+      border-radius: 999px;
+      background: transparent;
+      color: #ebebeb;
+      font-family: 'Roboto', sans-serif;
+      font-size: 1rem;
+      font-weight: 300;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.18s ease;
+      -webkit-tap-highlight-color: transparent;
+      white-space: nowrap;
     }
-    95%  { transform: none; text-shadow: none; }
-    100% { transform: none; text-shadow: none; }
-  }
+    .btn:hover { background: rgba(235,235,235,0.1); }
 
-  /* Mobile nav */
-  .nav-mobile {
-    background: #000;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 1rem 0.5rem;
-    padding-bottom: max(1rem, env(safe-area-inset-bottom));
-  }
+    /* ─── Tagline ─── */
+    .cta-tagline {
+      font-size: 0.76rem;
+      color: rgba(235,235,235,0.65);
+      margin-bottom: 2.5rem;
+    }
 
-  .nav-mobile button {
-    background: none;
-    border: none;
-    color: #ebebeb;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
-    font-size: clamp(0.85rem, 3.2vw, 1rem);
-    cursor: pointer;
-    letter-spacing: 0.04em;
-    padding: 0.25rem 0.2rem;
-    transition: opacity 0.2s;
-  }
+    /* ─── Social icons ─── */
+    .social-icons {
+      display: flex;
+      gap: 0.85rem;
+      align-items: center;
+    }
+    .social-icons a {
+      color: #ebebeb;
+      opacity: 0.82;
+      transition: opacity 0.18s;
+      display: flex;
+    }
+    .social-icons a:hover { opacity: 1; }
 
-  .nav-mobile button:hover { opacity: 0.7; }
+    /* ─── Mobile ─── */
+    @media (max-width: 767px) {
+      .page {
+        flex-direction: column;
+        height: 100dvh;
+        position: relative;
+      }
+      .content-panel {
+        width: 100%;
+        min-width: 0;
+        padding: 48px 22px 18px;
+        flex-shrink: 0;
+        background: transparent;
+        position: relative;
+        z-index: 1;
+      }
+      .wordmark {
+        font-size: 2.8rem;
+        margin-bottom: 0.9rem;
+        text-align: center;
+      }
+      .description {
+        font-size: 0.9rem;
+        max-width: none;
+        margin-bottom: 1rem;
+      }
+      .buttons { margin-bottom: 0.3rem; gap: 0; }
+      .buttons .btn:first-child { margin-bottom: 1.5rem; }
+      .cta-tagline { margin-bottom: 2rem; }
+      .image-panel {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        flex: none;
+      }
+      .image-panel img {
+        object-position: center;
+      }
+    }
 
-  /* Active nav button gets underline */
-  .nav-mobile button.active {
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
+    /* ─── Compact layout for short-viewport phones (e.g. iPhone SE) ─── */
+    body.compact-mobile .content-panel { padding-top: 32px; padding-bottom: 6px; }
+    body.compact-mobile .wordmark { margin-bottom: 0.75rem; }
+    body.compact-mobile .description { margin-bottom: 1rem; }
+    body.compact-mobile .buttons { margin-bottom: 0.3rem; }
+    body.compact-mobile .buttons .btn:first-child { margin-bottom: 1.5rem; }
+    body.compact-mobile .cta-tagline { margin-bottom: 2rem; }
 
-  /* ─── MOBILE CARD (single full-height panel, slides up from bottom) ─── */
-  .card-mobile {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 20;
-    background: rgba(0, 0, 0, 0.88);
-    transform: translateY(100%);
-    transition: transform 0.55s ease;
-    overflow: hidden;
-    /* top set by JS to sit just above the nav bar */
-  }
-
-  .card-mobile.open { transform: translateY(0); }
-
-  /* Text carousel viewport — clips panels */
-  .card-carousel {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    z-index: 35;
-  }
-
-  /* Individual text panels */
-  .card-panel {
-    position: absolute;
-    inset: 0;
-    padding: 1.5rem 2rem 3.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    font-size: 1rem;
-    line-height: 1.75;
-    color: #ebebeb;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
-    transform: translateY(100%);
-    transition: transform 0.45s ease, opacity 0.3s ease;
-    opacity: 0;
-    overflow-y: auto;
-  }
-
-  .card-panel.active {
-    transform: translateY(0);
-    opacity: 1;
-  }
-
-  .card-panel.exit-up {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-
-  /* Font size set dynamically by JS based on actual card height */
-  /* Base size intentionally large — JS will scale down for longer content */
-
-  .card-panel p + p { margin-top: 1.1em; }
-  .faq-pair { margin-bottom: 1.8em; }
-  .faq-pair:last-child { margin-bottom: 0; }
-  .faq-pair p + p { margin-top: 0.25em; }
-  .faq-pair ol { margin-top: 0.5em; padding-left: 1.4em; }
-  .faq-pair ol li + li { margin-top: 0.25em; }
-  .faq-pair strong { font-weight: 700; font-size: 1.05em; }
-
-  /* Caret — always fixed at bottom right of card, never moves */
-  .card-caret-mobile {
-    position: absolute;
-    bottom: 1.4rem;
-    right: 1.6rem;
-    background: none;
-    border: none;
-    cursor: pointer;
-    z-index: 40;
-    opacity: 0;
-    transition: opacity 0.35s ease;
-    padding: 0.4rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .card-caret-mobile::after {
-    content: '';
-    display: block;
-    width: 22px;
-    height: 22px;
-    border-right: 2.5px solid #ebebeb;
-    border-bottom: 2.5px solid #ebebeb;
-    transform: rotate(45deg) translateY(-4px);
-  }
-
-  .card-mobile.open .card-caret-mobile { opacity: 1; }
-  .card-caret-mobile:hover { opacity: 0.7 !important; }
-
-  /* Experience CTA */
-  .exp-cta-mobile {
-    display: block;
-    margin-top: 4.5em;
-    text-align: center;
-    color: #ebebeb;
-    text-decoration: underline;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
-    font-size: inherit;
-  }
-  .exp-cta-mobile:hover { opacity: 0.7; }
-
-  .hero-cta-mobile {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    z-index: 15;
-    transition: opacity 0.4s ease;
-  }
-  .hero-cta-mobile.hidden { opacity: 0; pointer-events: none; }
-  .cta-listen-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.45em;
-    background: #8b1a1a;
-    border: 1.5px solid #ffffff;
-    border-radius: 26px;
-    color: #ffffff;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
-    font-size: clamp(1.2rem, 5vw, 1.5rem);
-    letter-spacing: 0.04em;
-    text-decoration: none;
-    white-space: nowrap;
-    cursor: pointer;
-    padding: 0.65rem 1.8rem;
-  }
-  .cta-listen-btn:hover { background: #a82020; }
-
-  .social-icons {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 14px;
-    align-items: center;
-    transition: opacity 0.4s ease;
-  }
-  .social-icons-desktop { z-index: 10; }
-  .social-icons-mobile  { z-index: 15; }
-  .social-icons-mobile.hidden { opacity: 0; pointer-events: none; }
-  .hero-cta-desktop {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-  }
-  .hero-cta-desktop .cta-label {
-    font-family: 'Rubik Glitch', cursive;
-    font-size: 1.6rem;
-    color: #ffffff;
-    letter-spacing: 0.12em;
-    white-space: nowrap;
-    text-decoration: none;
-    cursor: pointer;
-    background: #8b1a1a;
-    border: 1.5px solid #ffffff;
-    border-radius: 999px;
-    padding: 0.55rem 1.6rem;
-    transition: background 0.15s ease;
-  }
-  .hero-cta-desktop .cta-label:hover {
-    background: #a82020;
-  }
-  .hero-cta-desktop img {
-    width: 96px;
-    height: 96px;
-  }
-  .ig-link {
-    color: #ebebeb;
-    text-decoration: none;
-    display: block;
-    line-height: 0;
-    transition: color 0.2s ease;
-  }
-  .ig-link:hover { color: #ffffff; }
-
-  /* Responsive visibility */
-  @media (min-width: 1281px) {
-    .page-desktop { display: flex; }
-    .page-mobile { display: none !important; }
-  }
-
-  @media (max-width: 1280px) {
-    .page-mobile { display: flex; }
-    .page-desktop { display: none !important; }
-  }
-</style>
-<script>
-  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-</script>
-<script defer src="/_vercel/insights/script.js"></script>
+    /* ─── Feedback modal ─── */
+    .fb-overlay {
+      display: flex;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .fb-overlay.active { opacity: 1; pointer-events: auto; }
+    .fb-modal {
+      background: #0a0a0a;
+      border: 1px solid rgba(235,235,235,0.15);
+      border-radius: 6px;
+      max-width: 480px;
+      width: 100%;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+    .fb-modal-body {
+      overflow-y: auto;
+      padding: 2rem 1.75rem 1.75rem;
+      flex: 1;
+      -webkit-overflow-scrolling: touch;
+    }
+    .fb-modal-close {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      background: none;
+      border: none;
+      color: rgba(235,235,235,0.5);
+      font-size: 1.3rem;
+      line-height: 1;
+      padding: 0.25rem 0.5rem;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: color 0.15s;
+      z-index: 1;
+    }
+    .fb-modal-close:hover { color: #ebebeb; }
+    .fb-creator-note { font-weight: 700; font-size: 0.95em; margin-bottom: 0.6em; }
+    .fb-intro { margin-bottom: 1.4em; font-size: 0.88em; line-height: 1.55; color: rgba(235,235,235,0.75); }
+    .fb-q { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.2em; }
+    .fb-q label { font-weight: 700; font-size: 0.9em; }
+    .fb-q textarea,
+    .fb-q input[type="email"] {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(235,235,235,0.25);
+      border-radius: 4px;
+      color: #ebebeb;
+      font-family: 'Roboto', sans-serif;
+      font-size: 0.9em;
+      padding: 0.5rem 0.6rem;
+      resize: vertical;
+      width: 100%;
+    }
+    .fb-q textarea:focus,
+    .fb-q input[type="email"]:focus { outline: none; border-color: rgba(235,235,235,0.6); }
+    .fb-toggle-row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .fb-toggle-btn {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(235,235,235,0.3);
+      border-radius: 4px;
+      color: #ebebeb;
+      font-family: 'Roboto', sans-serif;
+      font-size: 0.9em;
+      padding: 0.35rem 0.75rem;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .fb-toggle-btn.selected { border-color: #ebebeb; background: rgba(235,235,235,0.15); }
+    .fb-submit {
+      display: block;
+      margin: 0.6em auto 0;
+      background: none;
+      border: 1px solid #ffffff;
+      border-radius: 4px;
+      color: #ffffff;
+      font-family: 'Roboto', sans-serif;
+      font-size: 0.9em;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.5rem 1.2rem;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .fb-submit:hover { background: rgba(255,255,255,0.08); }
+    .fb-submit:disabled { opacity: 0.4; cursor: not-allowed; }
+    .fb-error { font-size: 0.85em; color: #ff6b6b; margin-top: 0.5em; min-height: 1em; }
+    .fb-thanks { display: none; margin-top: 0.8em; font-size: 0.9em; opacity: 0.75; text-align: center; }
+    .fb-thanks.active { display: block; }
+    @media (max-width: 767px) {
+      .fb-overlay { align-items: flex-end; padding: 0; }
+      .fb-modal {
+        max-width: 100%;
+        border-radius: 12px 12px 0 0;
+        border-bottom: none;
+        max-height: 88dvh;
+        transform: translateY(100%);
+        transition: transform 0.55s ease;
+      }
+      .fb-overlay.active .fb-modal { transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
+  <main class="page">
+    <div class="content-panel">
+      <h1 class="wordmark">LORELAND</h1>
 
-<!-- ═══════════════════════ DESKTOP ═══════════════════════ -->
-<div class="page-desktop" id="pageDesktop">
+      <p class="description">Loreland is a location-aware storytelling app that creates original horror stories inspired by your immediate surroundings. Open the app anywhere, press play, and hear an eerie tale that unfolds right where you're standing. Waiting for your coffee. Walking through your neighborhood. Sitting in the break room. Resting at a highway pull-off. Even the most familiar places can become strangely unfamiliar.</p>
 
-  <div class="grid-desktop" id="gridDesktop">
+      <div class="buttons">
+        <a href="https://loreland-eight.vercel.app" target="_blank" rel="noopener" class="btn">
+          <svg aria-hidden="true" style="height:0.7em;width:auto;flex-shrink:0" viewBox="0 0 10 12" fill="none">
+            <polygon points="1,1 9,6 1,11" stroke="#ebebeb" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+          listen to a story
+        </a>
+        <button id="feedback-btn" class="btn">give feedback</button>
+      </div>
 
-    <!-- Top row -->
-    <div class="img-cell" id="d-tlm"><img src="Loreland_Laundromat.jpg" alt="Laundromat"></div>
-    <div class="img-cell" id="d-wm"><img src="Loreland_Gas_Station.jpg" alt="Gas Station"></div>
-    <div class="img-cell" id="d-sw"><img src="Loreland_Elevator.jpg" alt="Elevator"></div>
-    <div class="img-cell" id="d-gh"><img src="Loreland_Suburban_Intersection.jpg" alt="Suburban Intersection"></div>
+      <p class="cta-tagline">We would love to get your take!</p>
 
-    <!-- Bottom row -->
-    <div class="img-cell" id="d-fiw"><img src="Loreland_Hospital_Hallway.jpg" alt="Hospital Hallway"></div>
-    <div class="img-cell" id="d-fot"><img src="Loreland_Empty_Playground.jpg" alt="Empty Playground"></div>
-    <div class="img-cell" id="d-www"><img src="Loreland_Parking_Lot.jpg" alt="Parking Lot"></div>
-    <div class="img-cell" id="d-dag"><img src="Loreland_Grocery_Aisle.jpg" alt="Grocery Aisle"></div>
-
-    <!-- Overlay -->
-    <div class="grid-overlay"></div>
-
-    <!-- Hero -->
-    <div class="hero-desktop" id="heroDesktop">LORELAND</div>
-
-    <div id="social-desktop" class="social-icons social-icons-desktop">
-      <a href="https://www.instagram.com/lorelandapp/" target="_blank" rel="noopener"
-         class="ig-link" aria-label="Loreland on Instagram">
-        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24"
-             fill="none" stroke="currentColor" stroke-width="1.5"
-             stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-          <circle cx="12" cy="12" r="4"/>
-          <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
-        </svg>
-      </a>
-      <a href="https://x.com/lorelandapp" target="_blank" rel="noopener"
-         class="ig-link" aria-label="Loreland on X">
-        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24"
-             fill="currentColor">
-          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-        </svg>
-      </a>
-    </div>
-
-    <div id="cta-desktop" class="hero-cta-desktop">
-      <a href="https://loreland-eight.vercel.app" target="_blank" rel="noopener"
-         class="cta-label">▶ listen here</a>
-      <img src="qr-code.png" alt="QR code — scan to experience Loreland" width="96" height="96">
-    </div>
-
-    <!-- About card (col 1) -->
-    <div class="card-desktop" id="cardAboutD" style="left:0; width:25%;">
-      <div class="card-content-desktop">
-        <p>Loreland is a location-aware storytelling app that creates original horror stories inspired by your immediate surroundings. Open the app anywhere, press play, and hear an eerie tale that unfolds right where you're standing. Waiting for your coffee. Walking through your neighborhood. Sitting in the break room. Resting at a highway pull-off. Even the most familiar places can become strangely unfamiliar. Each story is uniquely crafted using your hyper-local environment as inspiration, transforming ordinary moments into unsettling encounters filled with mystery, uncanny events, and lingering suspense.</p>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/lorelandapp/" target="_blank" rel="noopener" aria-label="Loreland on Instagram">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="1.5"
+               stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+          </svg>
+        </a>
+        <a href="https://x.com/lorelandapp" target="_blank" rel="noopener" aria-label="Loreland on X">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+               fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
       </div>
     </div>
 
-    <!-- Narrative AR card (col 2) -->
-    <div class="card-desktop" id="cardNarrativeD" style="left:25%; width:25%;">
-      <div class="card-content-desktop">
-        <p>Narrative Augmented Reality (Narrative AR) is a new form of storytelling that augments the world not with digital graphics, but with imagination. Instead of placing virtual objects on a screen, Loreland layers AI-generated narratives onto the real places around you, using your location, the surrounding landscape, weather, time of day, and atmosphere as the foundation for each story. The physical world becomes the stage, while your imagination does the rest. A quiet neighborhood, a parking lot, or the trail you walk every day suddenly carries mystery, tension, and possibility. By transforming familiar places into living settings for immersive stories, Narrative AR introduces a new way to experience both storytelling and the world itself.</p>
-      </div>
+    <div class="image-panel">
+      <picture>
+        <source media="(max-width: 767px)" srcset="Loreland_Gas_Station_3.jpg">
+        <img src="Loreland_Gas_Station_2.jpg" alt="A gas station at night" />
+      </picture>
     </div>
-
-    <!-- FAQ card (col 3) -->
-    <div class="card-desktop" id="cardFaqD" style="left:50%; width:25%;">
-      <div class="card-content-desktop">
-        <div class="faq-pair">
-          <p><strong>How does it work?</strong></p>
-          <ol>
-            <li>Allow location access.</li>
-            <li>Choose a horror genre.</li>
-            <li>Listen to a story inspired by where you're standing.</li>
-          </ol>
-        </div>
-        <div class="faq-pair">
-          <p><strong>Do I need to download anything?</strong></p>
-          <p>No.</p>
-        </div>
-        <div class="faq-pair">
-          <p><strong>Will I hear the same story twice?</strong></p>
-          <p>No. Every story is generated uniquely for your location, so each listening experience is different.</p>
-        </div>
-        <div class="faq-pair">
-          <p><strong>How long is each story?</strong></p>
-          <p>About two minutes.</p>
-        </div>
-        <div class="faq-pair">
-          <p><strong>Do I have to be somewhere spooky?</strong></p>
-          <p>No. Loreland works anywhere — from a grocery store to an airport, neighborhood park, office building, or hiking trail.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Feedback card (col 4) -->
-    <div class="card-desktop" id="cardContactD" style="left:75%; width:25%;">
-      <div class="card-content-desktop">
+  </main>
+  <div id="fb-overlay" class="fb-overlay" role="dialog" aria-modal="true" aria-label="Give feedback">
+    <div id="fb-modal" class="fb-modal">
+      <button class="fb-modal-close" id="fb-close" aria-label="Close">×</button>
+      <div class="fb-modal-body">
         <p class="fb-creator-note">Every response is read by the creator.</p>
         <p class="fb-intro">Your feedback directly shapes what Loreland becomes next. The short questionnaire below only takes a minute, and it's the single most helpful thing you can do to help this grow into a fully-featured app.</p>
         <div class="fb-q">
@@ -764,532 +389,77 @@
         <p class="fb-thanks">Thanks for your feedback!</p>
       </div>
     </div>
-
-  </div><!-- /grid-desktop -->
-
-  <!-- Nav -->
-  <div class="nav-desktop">
-    <div class="nav-item-desktop">
-      <button onclick="openCardDesktop('about')">about</button>
-      <button class="nav-close-desktop" id="closeAboutD" onclick="closeCardDesktop('about')">✕</button>
-    </div>
-    <div class="nav-item-desktop">
-      <button onclick="openCardDesktop('narrative')">narrative AR</button>
-      <button class="nav-close-desktop" id="closeNarrativeD" onclick="closeCardDesktop('narrative')">✕</button>
-    </div>
-    <div class="nav-item-desktop">
-      <button onclick="openCardDesktop('faq')">FAQ</button>
-      <button class="nav-close-desktop" id="closeFaqD" onclick="closeCardDesktop('faq')">✕</button>
-    </div>
-    <div class="nav-item-desktop">
-      <button onclick="openCardDesktop('contact')">feedback</button>
-      <button class="nav-close-desktop" id="closeContactD" onclick="closeCardDesktop('contact')">✕</button>
-    </div>
   </div>
 
-</div><!-- /page-desktop -->
-
-
-<!-- ═══════════════════════ MOBILE ═══════════════════════ -->
-<div class="page-mobile" id="pageMobile">
-
-  <!-- Hero sits outside grid, overlaid on full page width -->
-  <div class="hero-mobile" id="heroMobile">LORELAND</div>
-
-  <div id="social-mobile" class="social-icons social-icons-mobile">
-    <a href="https://www.instagram.com/lorelandapp/" target="_blank" rel="noopener"
-       class="ig-link" aria-label="Loreland on Instagram">
-      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24"
-           fill="none" stroke="currentColor" stroke-width="1.5"
-           stroke-linecap="round" stroke-linejoin="round">
-        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-        <circle cx="12" cy="12" r="4"/>
-        <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
-      </svg>
-    </a>
-    <a href="https://x.com/lorelandapp" target="_blank" rel="noopener"
-       class="ig-link" aria-label="Loreland on X">
-      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24"
-           fill="currentColor">
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-      </svg>
-    </a>
-  </div>
-
-  <div id="cta-mobile" class="hero-cta-mobile">
-    <a href="https://loreland-eight.vercel.app" target="_blank" rel="noopener"
-       class="cta-listen-btn"><svg aria-hidden="true" style="height:0.75em;width:auto;flex-shrink:0" viewBox="0 0 10 12" fill="none"><polygon points="1,1 9,6 1,11" stroke="#ffffff" stroke-width="1.5" stroke-linejoin="round"/></svg>Listen</a>
-  </div>
-
-  <div class="grid-mobile" id="gridMobile">
-
-    <!-- Row 1 -->
-    <div class="img-cell"><img src="Loreland_Laundromat.jpg" alt="Laundromat"></div>
-    <div class="img-cell"><img src="Loreland_Gas_Station.jpg" alt="Gas Station"></div>
-
-    <!-- Row 2 -->
-    <div class="img-cell"><img src="Loreland_Hospital_Hallway.jpg" alt="Hospital Hallway"></div>
-    <div class="img-cell"><img src="Loreland_Empty_Playground.jpg" alt="Empty Playground"></div>
-
-    <!-- Row 3 -->
-    <div class="img-cell"><img src="Loreland_Elevator.jpg" alt="Elevator"></div>
-    <div class="img-cell"><img src="Loreland_Suburban_Intersection.jpg" alt="Suburban Intersection"></div>
-
-    <!-- Row 4 -->
-    <div class="img-cell"><img src="Loreland_Parking_Lot.jpg" alt="Parking Lot"></div>
-    <div class="img-cell"><img src="Loreland_Grocery_Aisle.jpg" alt="Grocery Aisle"></div>
-
-    <!-- Overlay -->
-    <div class="grid-overlay"></div>
-
-    <!-- Single full-height card with text carousel -->
-    <div class="card-mobile" id="cardMobile">
-
-      <!-- Caret to close — always stays put -->
-      <button class="card-caret-mobile" id="caretMobile" onclick="closeMobileCard()"></button>
-
-      <!-- Text carousel -->
-      <div class="card-carousel">
-
-        <!-- About panel -->
-        <div class="card-panel" id="panelAbout">
-          <p>Loreland is a location-aware storytelling app that creates original horror stories inspired by your immediate surroundings. Open the app anywhere, press play, and hear an eerie tale that unfolds right where you're standing. Waiting for your coffee. Walking through your neighborhood. Sitting in the break room. Resting at a highway pull-off. Even the most familiar places can become strangely unfamiliar. Each story is uniquely crafted using your hyper-local environment as inspiration, transforming ordinary moments into unsettling encounters filled with mystery, uncanny events, and lingering suspense.</p>
-        </div>
-
-        <!-- Narrative AR panel -->
-        <div class="card-panel" id="panelNarrative">
-          <p>Narrative Augmented Reality (Narrative AR) is a new form of storytelling that augments the world not with digital graphics, but with imagination. Instead of placing virtual objects on a screen, Loreland layers AI-generated narratives onto the real places around you, using your location, the surrounding landscape, weather, time of day, and atmosphere as the foundation for each story. The physical world becomes the stage, while your imagination does the rest. A quiet neighborhood, a parking lot, or the trail you walk every day suddenly carries mystery, tension, and possibility. By transforming familiar places into living settings for immersive stories, Narrative AR introduces a new way to experience both storytelling and the world itself.</p>
-        </div>
-
-        <!-- FAQ panel -->
-        <div class="card-panel" id="panelFaq">
-          <div class="faq-pair">
-            <p><strong>How does it work?</strong></p>
-            <ol>
-              <li>Allow location access.</li>
-              <li>Choose a horror genre.</li>
-              <li>Listen to a story inspired by where you're standing.</li>
-            </ol>
-          </div>
-          <div class="faq-pair">
-            <p><strong>Do I need to download anything?</strong></p>
-            <p>No.</p>
-          </div>
-          <div class="faq-pair">
-            <p><strong>Will I hear the same story twice?</strong></p>
-            <p>No. Every story is generated uniquely for your location, so each listening experience is different.</p>
-          </div>
-          <div class="faq-pair">
-            <p><strong>How long is each story?</strong></p>
-            <p>About two minutes.</p>
-          </div>
-          <div class="faq-pair">
-            <p><strong>Do I have to be somewhere spooky?</strong></p>
-            <p>No. Loreland works anywhere — from a grocery store to an airport, neighborhood park, office building, or hiking trail.</p>
-          </div>
-        </div>
-
-        <!-- Feedback panel -->
-        <div class="card-panel" id="panelContact">
-          <p class="fb-creator-note">Every response is read by the creator.</p>
-        <p class="fb-intro">Your feedback directly shapes what Loreland becomes next. The short questionnaire below only takes a minute, and it's the single most helpful thing you can do to help this grow into a fully-featured app.</p>
-            <div class="fb-q">
-            <label>How would you describe the experience in your own words?</label>
-            <textarea rows="3" placeholder="A sentence or two…"></textarea>
-          </div>
-          <div class="fb-q">
-            <label>How likely are you to use this on a regular basis? (1 = unlikely, 5 = definitely)</label>
-            <div class="fb-toggle-row">
-              <button class="fb-toggle-btn" data-value="1">1</button>
-              <button class="fb-toggle-btn" data-value="2">2</button>
-              <button class="fb-toggle-btn" data-value="3">3</button>
-              <button class="fb-toggle-btn" data-value="4">4</button>
-              <button class="fb-toggle-btn" data-value="5">5</button>
-            </div>
-          </div>
-          <div class="fb-q">
-            <label>What feels like a fair monthly price?</label>
-            <div class="fb-toggle-row">
-              <button class="fb-toggle-btn" data-value="0">$0</button>
-              <button class="fb-toggle-btn" data-value="3">$3</button>
-              <button class="fb-toggle-btn" data-value="5">$5</button>
-              <button class="fb-toggle-btn" data-value="10">$10</button>
-            </div>
-          </div>
-          <div class="fb-q">
-            <label>Who's the first person you'd share this with, and why?</label>
-            <textarea rows="2" placeholder="A friend who loves horror? Your partner?"></textarea>
-          </div>
-          <div class="fb-q">
-            <label>Want to be a beta tester when Loreland launches?</label>
-            <input type="email" placeholder="your@email.com" autocomplete="email" />
-          </div>
-          <button class="fb-submit">Submit Feedback</button>
-        <p class="fb-error"></p>
-          <p class="fb-thanks">Thanks for your feedback!</p>
-        </div>
-
-      </div><!-- /card-carousel -->
-    </div><!-- /card-mobile -->
-
-  </div><!-- /grid-mobile -->
-
-  <div class="nav-mobile">
-    <button data-section="about" onclick="openMobileSection('about')">about</button>
-    <button data-section="narrative" onclick="openMobileSection('narrative')">narrative AR</button>
-    <button data-section="faq" onclick="openMobileSection('faq')">FAQ</button>
-    <button data-section="contact" onclick="openMobileSection('contact')">feedback</button>
-  </div>
-
-</div><!-- /page-mobile -->
-
-<script>
-// ─── DESKTOP LOGIC ───────────────────────────────────────────
-
-let openDesktopCard = null;
-
-const heroD = document.getElementById('heroDesktop');
-const gridD = document.getElementById('gridDesktop');
-
-// Set desktop hero position and size after layout
-function positionHeroDesktop() {
-  const grid = gridD;
-  const gridRect = grid.getBoundingClientRect();
-  const rowH = gridRect.height / 2;
-
-  // Lower third of top row (vertical position unchanged — user likes this)
-  const topOfLowerThird = rowH * (2 / 3);
-  const lowerThirdH = rowH / 3;
-
-  // Font size as a simple, predictable fraction of the lower-third height.
-  // (Previous width-matching approach against Rubik Glitch's jagged glyphs
-  // was unreliable and produced runaway sizes — back to height-based.)
-  const fs = Math.round(lowerThirdH * 0.86);
-
-  heroD.style.fontSize = fs + 'px';
-  heroD.dataset.fullFontSize = fs;
-
-  // Vertical: center in lower third of top row
-  const topPos = topOfLowerThird + (lowerThirdH - fs) / 2;
-  heroD.style.top = topPos + 'px';
-  heroD.dataset.fullTop = topPos;
-  const igD = document.getElementById('social-desktop');
-  if (igD) {
-    const hRect = heroD.getBoundingClientRect();
-    const pRect = document.getElementById('pageDesktop').getBoundingClientRect();
-    const socialTop = hRect.bottom - pRect.top + 10;
-    igD.style.top = socialTop + 'px';
-    const ctaD = document.getElementById('cta-desktop');
-    if (ctaD) ctaD.style.top = (socialTop + igD.offsetHeight + 52) + 'px';
-  }
-}
-
-function getDesktopCard(name) {
-  const map = { about: 'cardAboutD', faq: 'cardFaqD', narrative: 'cardNarrativeD', contact: 'cardContactD' };
-  return document.getElementById(map[name]);
-}
-
-// Card height = full image grid height
-function setCardHeights() {
-  const h = gridD.offsetHeight;
-  document.querySelectorAll('.card-desktop').forEach(c => c.style.height = h + 'px');
-}
-
-function getDesktopCloseBtn(name) {
-  const map = { about: 'closeAboutD', faq: 'closeFaqD', narrative: 'closeNarrativeD', contact: 'closeContactD' };
-  return map[name] ? document.getElementById(map[name]) : null;
-}
-
-function showDesktopX(name) {
-  // Hide all X buttons first
-  document.querySelectorAll('.nav-close-desktop').forEach(b => b.classList.remove('visible'));
-  // Show just the one for the open card
-  if (name) {
-    const btn = getDesktopCloseBtn(name);
-    if (btn) btn.classList.add('visible');
-  }
-}
-
-function openCardDesktop(name) {
-  if (openDesktopCard === name) return;
-
-  if (openDesktopCard) {
-    const prev = getDesktopCard(openDesktopCard);
-    prev.classList.remove('content-visible');
-    prev.classList.remove('open');
-    _openDesktopCard(name);
-  } else {
-    _openDesktopCard(name);
-  }
-}
-
-function _openDesktopCard(name) {
-  openDesktopCard = name;
-  showDesktopX(name);
-  const card = getDesktopCard(name);
-  card.classList.add('open');
-  setTimeout(() => { card.classList.add('content-visible'); }, 560);
-}
-
-function closeCardDesktop(name) {
-  const card = getDesktopCard(name);
-  card.classList.remove('content-visible');
-  showDesktopX(null);
-  setTimeout(() => {
-    card.classList.remove('open');
-    openDesktopCard = null;
-  }, 310);
-}
-
-// ─── MOBILE LOGIC ────────────────────────────────────────────
-
-const heroM = document.getElementById('heroMobile');
-const gridM = document.getElementById('gridMobile');
-const pageMobile = document.getElementById('pageMobile');
-const cardMobile = document.getElementById('cardMobile');
-const navMobileButtons = document.querySelectorAll('.nav-mobile button[data-section]');
-
-let activeMobileSection = null;
-
-const panels = {
-  about: document.getElementById('panelAbout'),
-  narrative: document.getElementById('panelNarrative'),
-  faq: document.getElementById('panelFaq'),
-  contact: document.getElementById('panelContact')
-};
-
-function positionHeroMobile() {
-  const gridRect = gridM.getBoundingClientRect();
-  const pageRect = pageMobile.getBoundingClientRect();
-  const rowH = gridRect.height / 4;
-
-  // Size font to fit within screen width — LORELAND is ~8 chars
-  // Rubik Glitch is wide, so target ~80% of screen width max
-  const screenW = window.innerWidth;
-  const fs = Math.min(Math.round(rowH * 0.48), Math.round(screenW * 0.175));
-  heroM.style.fontSize = fs + 'px';
-  heroM.dataset.fullFontSize = fs;
-  const top = (gridRect.top - pageRect.top) + rowH - (fs * 0.7);
-  heroM.style.top = top + 'px';
-  heroM.dataset.fullTop = top;
-  const igM = document.getElementById('social-mobile');
-  if (igM) {
-    const hRect = heroM.getBoundingClientRect();
-    const pRect = pageMobile.getBoundingClientRect();
-    const socialTop = hRect.bottom - pRect.top + 10;
-    igM.style.top = socialTop + 'px';
-    const ctaM = document.getElementById('cta-mobile');
-    if (ctaM) ctaM.style.top = (gridRect.top - pRect.top + 3 * rowH) + 'px';
-  }
-}
-
-function hideHeroMobile() {
-  heroM.classList.add('hidden');
-  document.getElementById('social-mobile')?.classList.add('hidden');
-  document.getElementById('cta-mobile')?.classList.add('hidden');
-}
-
-function showHeroMobile() {
-  heroM.classList.remove('hidden');
-  document.getElementById('social-mobile')?.classList.remove('hidden');
-  document.getElementById('cta-mobile')?.classList.remove('hidden');
-}
-
-function restoreHeroMobile() {
-  showHeroMobile();
-}
-
-function setCardFontSize() {
-  const cardH = cardMobile.offsetHeight;
-  const cardW = cardMobile.offsetWidth;
-  if (!cardH || !cardW) return;
-
-  // Available height = card height minus top padding, bottom padding, and caret area
-  const availH = cardH - 130;
-
-  // Get the longest text content (narrative AR panel)
-  const refPanel = document.getElementById('panelNarrative');
-  if (!refPanel) return;
-
-  // Create a temporary off-screen div to measure text at different sizes
-  const tester = document.createElement('div');
-  tester.style.cssText = `
-    position: fixed;
-    visibility: hidden;
-    width: ${cardW - 64}px;
-    font-family: Roboto, sans-serif;
-    font-weight: 300;
-    line-height: 1.75;
-    padding: 0;
-    margin: 0;
-  `;
-  tester.innerHTML = refPanel.innerHTML;
-  document.body.appendChild(tester);
-
-  // Find largest font size where text fits
-  let bestFs = 16;
-  for (let fs = 28; fs >= 16; fs--) {
-    tester.style.fontSize = fs + 'px';
-    if (tester.offsetHeight <= availH) {
-      bestFs = fs;
-      break;
+  <script>
+    if (window.screen.height < 700 && window.innerWidth < 768) {
+      document.body.classList.add('compact-mobile');
     }
-  }
 
-  document.body.removeChild(tester);
+    const fbOverlay = document.getElementById('fb-overlay');
+    const fbModal   = document.getElementById('fb-modal');
 
-  // Apply to all panels
-  document.querySelectorAll('.card-panel').forEach(p => {
-    p.style.fontSize = bestFs + 'px';
-  });
-}
-
-function setCardHeight() {
-  // Card fills grid area (everything above the nav bar)
-  const gridRect = gridM.getBoundingClientRect();
-  cardMobile.style.top = gridRect.top + 'px';
-  setCardFontSize();
-}
-
-function setActiveNavButton(name) {
-  document.querySelectorAll('.nav-mobile button').forEach(btn => {
-    btn.classList.remove('active');
-  });
-  if (name) {
-    const btn = document.querySelector(`.nav-mobile button[data-section="${name}"]`);
-    if (btn) btn.classList.add('active');
-  }
-}
-
-function openMobileSection(name) {
-  if (name === activeMobileSection) return;
-
-  const newPanel = panels[name];
-  if (!newPanel) return;
-
-  if (!activeMobileSection) {
-    setCardHeight();
-    hideHeroMobile();
-    cardMobile.classList.add('open');
-    activeMobileSection = name;
-    setActiveNavButton(name);
-    heroM.classList.add('glitch-paused');
-    setTimeout(() => {
-      setCardFontSize();
-      newPanel.classList.add('active');
-    }, 400);
-  } else {
-    // Card already open — carousel: exit current up, bring new in from below
-    const currentPanel = panels[activeMobileSection];
-    if (currentPanel) {
-      currentPanel.classList.remove('active');
-      currentPanel.classList.add('exit-up');
-      setTimeout(() => { currentPanel.classList.remove('exit-up'); }, 450);
+    function openFeedback() {
+      fbOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
     }
-    activeMobileSection = name;
-    setActiveNavButton(name);
-    setTimeout(() => {
-      newPanel.classList.add('active');
-    }, 80);
-  }
-}
+    function closeFeedback() {
+      fbOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
 
-function closeMobileCard() {
-  if (!activeMobileSection) return;
-  const currentPanel = panels[activeMobileSection];
-  if (currentPanel) currentPanel.classList.remove('active');
-  setTimeout(() => {
-    cardMobile.classList.remove('open');
-    activeMobileSection = null;
-    setActiveNavButton(null);
-    restoreHeroMobile();
-    heroM.classList.remove('glitch-paused');
-  }, 200);
-}
+    document.addEventListener('touchmove', e => {
+      const modalBody = fbModal.querySelector('.fb-modal-body');
+      if (modalBody && modalBody.contains(e.target)) return;
+      e.preventDefault();
+    }, { passive: false });
 
+    document.getElementById('feedback-btn').addEventListener('click', openFeedback);
+    document.getElementById('fb-close').addEventListener('click', closeFeedback);
+    fbOverlay.addEventListener('click', e => { if (e.target === fbOverlay) closeFeedback(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeFeedback(); });
 
-// ─── FEEDBACK SUBMISSION ──────────────────────────────────────
-function submitFeedback(container) {
-  const textareas  = container.querySelectorAll('textarea');
-  const toggleRows = container.querySelectorAll('.fb-toggle-row');
-  const submitBtn  = container.querySelector('.fb-submit');
-  const thanksEl   = container.querySelector('.fb-thanks');
-  const errorEl    = container.querySelector('.fb-error');
-
-  const body = {
-    experienceDescription: textareas[0]?.value.trim() ?? '',
-    shareWith:             textareas[1]?.value.trim() ?? '',
-    regularBasisRating:    toggleRows[0]?.querySelector('.fb-toggle-btn.selected')?.dataset.value ?? null,
-    fairPrice:             toggleRows[1]?.querySelector('.fb-toggle-btn.selected')?.dataset.value ?? null,
-    betaTesterEmail:       container.querySelector('input[type="email"]')?.value.trim() ?? '',
-  };
-
-  submitBtn.disabled = true;
-  submitBtn.textContent = 'Submitting…';
-  errorEl.textContent = '';
-
-  fetch('/api/feedback', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
-  })
-    .then(res => {
-      if (!res.ok) throw new Error(`Server error ${res.status}`);
-      submitBtn.style.display = 'none';
-      thanksEl.classList.add('active');
-    })
-    .catch(() => {
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Submit Feedback';
-      errorEl.textContent = 'Something went wrong — please try again.';
+    fbModal.querySelectorAll('.fb-toggle-row').forEach(row => {
+      row.addEventListener('click', e => {
+        const btn = e.target.closest('.fb-toggle-btn');
+        if (!btn) return;
+        row.querySelectorAll('.fb-toggle-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+      });
     });
-}
 
-document.getElementById('cardContactD').querySelector('.fb-submit')
-  .addEventListener('click', () => submitFeedback(document.getElementById('cardContactD')));
-document.getElementById('panelContact').querySelector('.fb-submit')
-  .addEventListener('click', () => submitFeedback(document.getElementById('panelContact')));
-
-// ─── FEEDBACK TOGGLES ─────────────────────────────────────────
-document.querySelectorAll('.fb-toggle-row').forEach(row => {
-  row.addEventListener('click', e => {
-    const btn = e.target.closest('.fb-toggle-btn');
-    if (!btn) return;
-    row.querySelectorAll('.fb-toggle-btn').forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
-  });
-});
-
-// ─── INIT ─────────────────────────────────────────────────────
-
-function init() {
-  if (window.innerWidth > 1280) {
-    setCardHeights();
-    positionHeroDesktop();
-  } else {
-    positionHeroMobile();
-    setCardHeight();
-  }
-}
-
-function initWhenFontsReady() {
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(init);
-  } else {
-    init();
-  }
-}
-
-window.addEventListener('load', initWhenFontsReady);
-window.addEventListener('resize', () => {
-  if (window.innerWidth > 1280) {
-    setCardHeights();
-    if (!openDesktopCard) positionHeroDesktop();
-  } else {
-    positionHeroMobile();
-    setCardHeight();
-  }
-});
-</script>
+    fbModal.querySelector('.fb-submit').addEventListener('click', () => {
+      const textareas  = fbModal.querySelectorAll('textarea');
+      const toggleRows = fbModal.querySelectorAll('.fb-toggle-row');
+      const submitBtn  = fbModal.querySelector('.fb-submit');
+      const thanksEl   = fbModal.querySelector('.fb-thanks');
+      const errorEl    = fbModal.querySelector('.fb-error');
+      const body = {
+        experienceDescription: textareas[0]?.value.trim() ?? '',
+        shareWith:             textareas[1]?.value.trim() ?? '',
+        regularBasisRating:    toggleRows[0]?.querySelector('.fb-toggle-btn.selected')?.dataset.value ?? null,
+        fairPrice:             toggleRows[1]?.querySelector('.fb-toggle-btn.selected')?.dataset.value ?? null,
+        betaTesterEmail:       fbModal.querySelector('input[type="email"]')?.value.trim() ?? '',
+      };
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting…';
+      errorEl.textContent = '';
+      fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      })
+        .then(res => {
+          if (!res.ok) throw new Error();
+          submitBtn.style.display = 'none';
+          thanksEl.classList.add('active');
+        })
+        .catch(() => {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit Feedback';
+          errorEl.textContent = 'Something went wrong — please try again.';
+        });
+    });
+  </script>
 </body>
 </html>
