@@ -174,7 +174,7 @@
         flex: none;
       }
       .image-panel img {
-        object-position: 15% 50%;
+        object-position: center;
       }
     }
   </style>
@@ -218,7 +218,10 @@
     </div>
 
     <div class="image-panel">
-      <img src="Loreland_Gas_Station_2.jpg" alt="A gas station at night" />
+      <picture>
+        <source media="(max-width: 767px)" srcset="Loreland_Gas_Station_3.jpg">
+        <img src="Loreland_Gas_Station_2.jpg" alt="A gas station at night" />
+      </picture>
     </div>
   </main>
 </body>
