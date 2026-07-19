@@ -396,6 +396,12 @@
       document.body.style.overflow = '';
     }
 
+    document.addEventListener('touchmove', e => {
+      const modalBody = fbModal.querySelector('.fb-modal-body');
+      if (modalBody && modalBody.contains(e.target)) return;
+      e.preventDefault();
+    }, { passive: false });
+
     document.getElementById('feedback-btn').addEventListener('click', openFeedback);
     document.getElementById('fb-close').addEventListener('click', closeFeedback);
     fbOverlay.addEventListener('click', e => { if (e.target === fbOverlay) closeFeedback(); });
