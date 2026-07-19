@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loreland — Staging</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Glitch&family=Roboto:wght@300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      background: #000;
+      color: #ebebeb;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── Page layout ─── */
+    .page {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ─── Content panel ─── */
+    .content-panel {
+      width: 42%;
+      min-width: 340px;
+      padding: 60px 48px 60px 52px;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    /* ─── Image panel ─── */
+    .image-panel {
+      flex: 1;
+      overflow: hidden;
+    }
+    .image-panel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 55% center;
+      display: block;
+    }
+
+    /* ─── Wordmark ─── */
+    .wordmark {
+      font-family: 'Rubik Glitch', cursive;
+      font-size: clamp(2.4rem, 4.2vw, 4.4rem);
+      color: #ebebeb;
+      letter-spacing: 0.02em;
+      line-height: 1.05;
+      margin-bottom: 1.6rem;
+      user-select: none;
+    }
+
+    /* ─── Description ─── */
+    .description {
+      font-size: 0.93rem;
+      line-height: 1.72;
+      color: #ebebeb;
+      margin-bottom: 1.75rem;
+      max-width: 38ch;
+    }
+
+    /* ─── Buttons ─── */
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.6rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55em;
+      padding: 0.55rem 1.3rem;
+      border: 1px solid #ebebeb;
+      border-radius: 999px;
+      background: transparent;
+      color: #ebebeb;
+      font-family: 'Roboto', sans-serif;
+      font-size: 0.87rem;
+      font-weight: 300;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.18s ease;
+      -webkit-tap-highlight-color: transparent;
+      white-space: nowrap;
+    }
+    .btn:hover { background: rgba(235,235,235,0.1); }
+
+    /* ─── Tagline ─── */
+    .cta-tagline {
+      font-size: 0.76rem;
+      color: rgba(235,235,235,0.65);
+      margin-bottom: 1.3rem;
+    }
+
+    /* ─── Social icons ─── */
+    .social-icons {
+      display: flex;
+      gap: 0.85rem;
+      align-items: center;
+    }
+    .social-icons a {
+      color: #ebebeb;
+      opacity: 0.82;
+      transition: opacity 0.18s;
+      display: flex;
+    }
+    .social-icons a:hover { opacity: 1; }
+
+    /* ─── Mobile ─── */
+    @media (max-width: 767px) {
+      .page {
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      .content-panel {
+        width: 100%;
+        min-width: 0;
+        padding: 36px 22px 30px;
+        flex-shrink: 1;
+      }
+      .wordmark {
+        font-size: 3rem;
+        margin-bottom: 1.1rem;
+      }
+      .description {
+        font-size: 0.9rem;
+        max-width: none;
+        margin-bottom: 1.5rem;
+      }
+      .image-panel {
+        width: 100%;
+        height: 44vh;
+        min-height: 220px;
+        flex: none;
+      }
+      .image-panel img {
+        object-position: center 12%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="content-panel">
+      <h1 class="wordmark">LORELAND</h1>
+
+      <p class="description">Loreland is a location-aware storytelling app that creates original horror stories inspired by your immediate surroundings. Open the app anywhere, press play, and hear an eerie tale that unfolds right where you're standing. Waiting for your coffee. Walking through your neighborhood. Sitting in the break room. Resting at a highway pull-off. Even the most familiar places can become strangely unfamiliar.</p>
+
+      <div class="buttons">
+        <a href="https://loreland-eight.vercel.app" target="_blank" rel="noopener" class="btn">
+          <svg aria-hidden="true" style="height:0.7em;width:auto;flex-shrink:0" viewBox="0 0 10 12" fill="none">
+            <polygon points="1,1 9,6 1,11" stroke="#ebebeb" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+          listen to a story
+        </a>
+        <button id="feedback-btn" class="btn">give feedback</button>
+      </div>
+
+      <p class="cta-tagline">We would love to get your take!</p>
+
+      <div class="social-icons">
+        <a href="https://www.instagram.com/lorelandapp/" target="_blank" rel="noopener" aria-label="Loreland on Instagram">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="1.5"
+               stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+          </svg>
+        </a>
+        <a href="https://x.com/lorelandapp" target="_blank" rel="noopener" aria-label="Loreland on X">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+               fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="image-panel">
+      <img src="Loreland_Gas_Station_2.jpg" alt="A gas station at night" />
+    </div>
+  </main>
+</body>
+</html>
