@@ -177,6 +177,112 @@
         object-position: center;
       }
     }
+
+    /* ─── Feedback modal ─── */
+    .fb-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .fb-overlay.active { display: flex; }
+    .fb-modal {
+      background: #0a0a0a;
+      border: 1px solid rgba(235,235,235,0.15);
+      border-radius: 6px;
+      max-width: 480px;
+      width: 100%;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+    .fb-modal-body {
+      overflow-y: auto;
+      padding: 2rem 1.75rem 1.75rem;
+      flex: 1;
+      -webkit-overflow-scrolling: touch;
+    }
+    .fb-modal-close {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      background: none;
+      border: none;
+      color: rgba(235,235,235,0.5);
+      font-size: 1.3rem;
+      line-height: 1;
+      padding: 0.25rem 0.5rem;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: color 0.15s;
+      z-index: 1;
+    }
+    .fb-modal-close:hover { color: #ebebeb; }
+    .fb-creator-note { font-weight: 700; font-size: 0.95em; margin-bottom: 0.6em; }
+    .fb-intro { margin-bottom: 1.4em; font-size: 0.88em; line-height: 1.55; color: rgba(235,235,235,0.75); }
+    .fb-q { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.2em; }
+    .fb-q label { font-weight: 700; font-size: 0.9em; }
+    .fb-q textarea,
+    .fb-q input[type="email"] {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(235,235,235,0.25);
+      border-radius: 4px;
+      color: #ebebeb;
+      font-family: 'Roboto', sans-serif;
+      font-size: 0.9em;
+      padding: 0.5rem 0.6rem;
+      resize: vertical;
+      width: 100%;
+    }
+    .fb-q textarea:focus,
+    .fb-q input[type="email"]:focus { outline: none; border-color: rgba(235,235,235,0.6); }
+    .fb-toggle-row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .fb-toggle-btn {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(235,235,235,0.3);
+      border-radius: 4px;
+      color: #ebebeb;
+      font-family: 'Roboto', sans-serif;
+      font-size: 0.9em;
+      padding: 0.35rem 0.75rem;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .fb-toggle-btn.selected { border-color: #ebebeb; background: rgba(235,235,235,0.15); }
+    .fb-submit {
+      margin-top: 0.6em;
+      background: none;
+      border: 1px solid #ffffff;
+      border-radius: 4px;
+      color: #ffffff;
+      font-family: 'Roboto', sans-serif;
+      font-size: 0.9em;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.5rem 1.2rem;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .fb-submit:hover { background: rgba(255,255,255,0.08); }
+    .fb-submit:disabled { opacity: 0.4; cursor: not-allowed; }
+    .fb-error { font-size: 0.85em; color: #ff6b6b; margin-top: 0.5em; min-height: 1em; }
+    .fb-thanks { display: none; margin-top: 0.8em; font-size: 0.9em; opacity: 0.75; }
+    .fb-thanks.active { display: block; }
+    @media (max-width: 767px) {
+      .fb-overlay { align-items: flex-end; padding: 0; }
+      .fb-modal {
+        max-width: 100%;
+        border-radius: 12px 12px 0 0;
+        border-bottom: none;
+        max-height: 88dvh;
+      }
+    }
   </style>
 </head>
 <body>
@@ -224,5 +330,109 @@
       </picture>
     </div>
   </main>
+  <div id="fb-overlay" class="fb-overlay" role="dialog" aria-modal="true" aria-label="Give feedback">
+    <div id="fb-modal" class="fb-modal">
+      <button class="fb-modal-close" id="fb-close" aria-label="Close">×</button>
+      <div class="fb-modal-body">
+        <p class="fb-creator-note">Every response is read by the creator.</p>
+        <p class="fb-intro">Your feedback directly shapes what Loreland becomes next. The short questionnaire below only takes a minute, and it's the single most helpful thing you can do to help this grow into a fully-featured app.</p>
+        <div class="fb-q">
+          <label>How would you describe the experience in your own words?</label>
+          <textarea rows="3" placeholder="A sentence or two…"></textarea>
+        </div>
+        <div class="fb-q">
+          <label>How likely are you to use this on a regular basis? (1 = unlikely, 5 = definitely)</label>
+          <div class="fb-toggle-row">
+            <button class="fb-toggle-btn" data-value="1">1</button>
+            <button class="fb-toggle-btn" data-value="2">2</button>
+            <button class="fb-toggle-btn" data-value="3">3</button>
+            <button class="fb-toggle-btn" data-value="4">4</button>
+            <button class="fb-toggle-btn" data-value="5">5</button>
+          </div>
+        </div>
+        <div class="fb-q">
+          <label>What feels like a fair monthly price?</label>
+          <div class="fb-toggle-row">
+            <button class="fb-toggle-btn" data-value="0">$0</button>
+            <button class="fb-toggle-btn" data-value="3">$3</button>
+            <button class="fb-toggle-btn" data-value="5">$5</button>
+            <button class="fb-toggle-btn" data-value="10">$10</button>
+          </div>
+        </div>
+        <div class="fb-q">
+          <label>Who's the first person you'd share this with, and why?</label>
+          <textarea rows="2" placeholder="A friend who loves horror? Your partner?"></textarea>
+        </div>
+        <div class="fb-q">
+          <label>Want to be a beta tester when Loreland launches?</label>
+          <input type="email" placeholder="your@email.com" autocomplete="email" />
+        </div>
+        <button class="fb-submit">Submit Feedback</button>
+        <p class="fb-error"></p>
+        <p class="fb-thanks">Thanks for your feedback!</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const fbOverlay = document.getElementById('fb-overlay');
+    const fbModal   = document.getElementById('fb-modal');
+
+    function openFeedback() {
+      fbOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeFeedback() {
+      fbOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('feedback-btn').addEventListener('click', openFeedback);
+    document.getElementById('fb-close').addEventListener('click', closeFeedback);
+    fbOverlay.addEventListener('click', e => { if (e.target === fbOverlay) closeFeedback(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeFeedback(); });
+
+    fbModal.querySelectorAll('.fb-toggle-row').forEach(row => {
+      row.addEventListener('click', e => {
+        const btn = e.target.closest('.fb-toggle-btn');
+        if (!btn) return;
+        row.querySelectorAll('.fb-toggle-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+      });
+    });
+
+    fbModal.querySelector('.fb-submit').addEventListener('click', () => {
+      const textareas  = fbModal.querySelectorAll('textarea');
+      const toggleRows = fbModal.querySelectorAll('.fb-toggle-row');
+      const submitBtn  = fbModal.querySelector('.fb-submit');
+      const thanksEl   = fbModal.querySelector('.fb-thanks');
+      const errorEl    = fbModal.querySelector('.fb-error');
+      const body = {
+        experienceDescription: textareas[0]?.value.trim() ?? '',
+        shareWith:             textareas[1]?.value.trim() ?? '',
+        regularBasisRating:    toggleRows[0]?.querySelector('.fb-toggle-btn.selected')?.dataset.value ?? null,
+        fairPrice:             toggleRows[1]?.querySelector('.fb-toggle-btn.selected')?.dataset.value ?? null,
+        betaTesterEmail:       fbModal.querySelector('input[type="email"]')?.value.trim() ?? '',
+      };
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting…';
+      errorEl.textContent = '';
+      fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      })
+        .then(res => {
+          if (!res.ok) throw new Error();
+          submitBtn.style.display = 'none';
+          thanksEl.classList.add('active');
+        })
+        .catch(() => {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit Feedback';
+          errorEl.textContent = 'Something went wrong — please try again.';
+        });
+    });
+  </script>
 </body>
 </html>
