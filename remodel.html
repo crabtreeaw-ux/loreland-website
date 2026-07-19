@@ -10,7 +10,13 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html, body {
+    html {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      background: #000;
+    }
+    body {
       height: 100%;
       overflow: hidden;
       background: #000;
@@ -24,6 +30,7 @@
     .page {
       display: flex;
       height: 100vh;
+      overflow: hidden;
     }
 
     /* ─── Content panel ─── */
@@ -76,9 +83,9 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 0.6rem;
       margin-bottom: 0.7rem;
     }
+    .buttons .btn:first-child { margin-bottom: 1.3rem; }
 
     .btn {
       display: inline-flex;
@@ -105,7 +112,7 @@
     .cta-tagline {
       font-size: 0.76rem;
       color: rgba(235,235,235,0.65);
-      margin-bottom: 1.3rem;
+      margin-bottom: 2.5rem;
     }
 
     /* ─── Social icons ─── */
@@ -127,12 +134,16 @@
       .page {
         flex-direction: column;
         height: 100dvh;
+        position: relative;
       }
       .content-panel {
         width: 100%;
         min-width: 0;
         padding: 24px 22px 18px;
         flex-shrink: 0;
+        background: transparent;
+        position: relative;
+        z-index: 1;
       }
       .wordmark {
         font-size: 2.8rem;
@@ -144,14 +155,17 @@
         max-width: none;
         margin-bottom: 1rem;
       }
-      .buttons { margin-bottom: 0.5rem; }
+      .buttons { margin-bottom: 0.5rem; gap: 0; }
+      .buttons .btn:first-child { margin-bottom: 0.4rem; }
       .cta-tagline { margin-bottom: 0.85rem; }
       .image-panel {
-        width: 100%;
-        flex: 1;
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        flex: none;
       }
       .image-panel img {
-        object-position: 54% 42%;
+        object-position: 55% 65%;
       }
     }
   </style>
