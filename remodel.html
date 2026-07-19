@@ -180,7 +180,7 @@
 
     /* ─── Feedback modal ─── */
     .fb-overlay {
-      display: none;
+      display: flex;
       position: fixed;
       inset: 0;
       background: rgba(0,0,0,0.8);
@@ -188,8 +188,11 @@
       align-items: center;
       justify-content: center;
       padding: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
     }
-    .fb-overlay.active { display: flex; }
+    .fb-overlay.active { opacity: 1; pointer-events: auto; }
     .fb-modal {
       background: #0a0a0a;
       border: 1px solid rgba(235,235,235,0.15);
@@ -256,7 +259,8 @@
     }
     .fb-toggle-btn.selected { border-color: #ebebeb; background: rgba(235,235,235,0.15); }
     .fb-submit {
-      margin-top: 0.6em;
+      display: block;
+      margin: 0.6em auto 0;
       background: none;
       border: 1px solid #ffffff;
       border-radius: 4px;
@@ -281,7 +285,10 @@
         border-radius: 12px 12px 0 0;
         border-bottom: none;
         max-height: 88dvh;
+        transform: translateY(100%);
+        transition: transform 0.55s ease;
       }
+      .fb-overlay.active .fb-modal { transform: translateY(0); }
     }
   </style>
 </head>
