@@ -180,14 +180,13 @@
       }
     }
 
-    @media (max-width: 767px) and (max-height: 700px) {
-      .content-panel { padding-top: 12px; padding-bottom: 10px; }
-      .wordmark { font-size: 2.3rem; margin-bottom: 0.4rem; }
-      .description { font-size: 0.82rem; margin-bottom: 0.5rem; }
-      .buttons { margin-bottom: 0.3rem; }
-      .buttons .btn:first-child { margin-bottom: 0.9rem; }
-      .cta-tagline { margin-bottom: 0.8rem; }
-    }
+    /* ─── Compact layout for short-viewport phones (e.g. iPhone SE) ─── */
+    body.compact-mobile .content-panel { padding-top: 12px; padding-bottom: 10px; }
+    body.compact-mobile .wordmark { font-size: 2.3rem; margin-bottom: 0.4rem; }
+    body.compact-mobile .description { font-size: 0.82rem; margin-bottom: 0.5rem; }
+    body.compact-mobile .buttons { margin-bottom: 0.3rem; }
+    body.compact-mobile .buttons .btn:first-child { margin-bottom: 0.9rem; }
+    body.compact-mobile .cta-tagline { margin-bottom: 0.8rem; }
 
     /* ─── Feedback modal ─── */
     .fb-overlay {
@@ -393,6 +392,10 @@
   </div>
 
   <script>
+    if (window.innerHeight < 550 && window.innerWidth < 768) {
+      document.body.classList.add('compact-mobile');
+    }
+
     const fbOverlay = document.getElementById('fb-overlay');
     const fbModal   = document.getElementById('fb-modal');
 
