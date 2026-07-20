@@ -78,6 +78,19 @@
       line-height: 1.05;
       margin-bottom: 1.6rem;
       user-select: none;
+      animation: wordmark-glitch 10s infinite;
+    }
+
+    @keyframes wordmark-glitch {
+      0%    { transform: none; text-shadow: none; }
+      92%   { transform: none; text-shadow: none; }
+      92.5% { transform: translateX(3px) skewX(-4deg);  text-shadow: -3px 0 #ff003c, 3px 0 #00f0ff; }
+      93%   { transform: translateX(-4px) skewX(3deg);  text-shadow:  3px 0 #ff003c, -3px 0 #00f0ff; }
+      93.5% { transform: translateX(2px) skewX(-2deg);  text-shadow: -2px 0 #ff003c, 2px 0 #00f0ff; }
+      94%   { transform: translateX(-3px) skewX(4deg);  text-shadow:  4px 0 #ff003c, -4px 0 #00f0ff; }
+      94.5% { transform: translateX(1px) skewX(-1deg);  text-shadow: -1px 0 #ff003c, 1px 0 #00f0ff; }
+      95%   { transform: none; text-shadow: none; }
+      100%  { transform: none; text-shadow: none; }
     }
 
     /* ─── Description ─── */
