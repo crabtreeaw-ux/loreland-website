@@ -141,11 +141,12 @@
     .social-icons a:hover { opacity: 1; }
 
     /* ─── Mobile ─── */
-    @media (max-width: 767px) {
+    @media (max-width: 767px), (orientation: portrait) {
       .page {
         flex-direction: column;
         height: 100dvh;
         position: relative;
+        justify-content: center;
       }
       .content-panel {
         width: 100%;
@@ -157,12 +158,12 @@
         z-index: 1;
       }
       .wordmark {
-        font-size: 2.8rem;
+        font-size: clamp(2.4rem, 10vw, 3.4rem);
         margin-bottom: 0.9rem;
         text-align: center;
       }
       .description {
-        font-size: 0.9rem;
+        font-size: clamp(0.85rem, 3.6vw, 1rem);
         max-width: none;
         margin-bottom: 1rem;
       }
@@ -178,6 +179,15 @@
       .image-panel img {
         object-position: center;
       }
+    }
+
+    @media (orientation: landscape) and (max-height: 700px) {
+      .content-panel { padding-top: 28px; padding-bottom: 28px; }
+      .wordmark { font-size: clamp(2.2rem, 4.5vw, 3rem); margin-bottom: 0.9rem; }
+      .description { font-size: 0.85rem; line-height: 1.5; margin-bottom: 1rem; }
+      .buttons { margin-bottom: 0.3rem; }
+      .buttons .btn:first-child { margin-bottom: 0.9rem; }
+      .cta-tagline { margin-bottom: 1rem; }
     }
 
     /* ─── Compact layout for short-viewport phones (e.g. iPhone SE) ─── */
@@ -342,7 +352,7 @@
 
     <div class="image-panel">
       <picture>
-        <source media="(max-width: 767px)" srcset="Loreland_Gas_Station_3.jpg">
+        <source media="(max-width: 767px), (orientation: portrait)" srcset="Loreland_Gas_Station_3.jpg">
         <img src="Loreland_Gas_Station_2.jpg" alt="A gas station at night" />
       </picture>
     </div>
