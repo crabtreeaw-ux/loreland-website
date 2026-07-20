@@ -181,6 +181,19 @@
       }
     }
 
+    /* ─── Portrait tablets and up (iPad, Surface, foldables open) ───
+       The clamp() values above were tuned for phone widths and hit their
+       ceiling by ~430px, so anything wider just holds that same size while
+       the canvas keeps growing. This raises the ceiling for the tablet
+       size class instead of letting text stall out early. */
+    @media (orientation: portrait) and (min-width: 768px) {
+      .content-panel { padding: 64px 64px 48px; }
+      .wordmark { font-size: clamp(3.2rem, 6vw, 5rem); margin-bottom: 1.2rem; }
+      .description { font-size: clamp(1rem, 2.1vw, 1.3rem); max-width: 46ch; margin-bottom: 1.5rem; }
+      .buttons .btn:first-child { margin-bottom: 1.5rem; }
+      .cta-tagline { margin-bottom: 2rem; }
+    }
+
     @media (orientation: landscape) and (max-height: 700px) {
       .content-panel { padding-top: 28px; padding-bottom: 28px; }
       .wordmark { font-size: clamp(2.2rem, 4.5vw, 3rem); margin-bottom: 0.9rem; }
